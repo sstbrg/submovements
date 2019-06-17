@@ -7,20 +7,23 @@ python:
   - 3.4
   - 2.7
 
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+# Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install: pip install -U tox-travis
 
-# command to run tests, e.g. python setup.py test
+# Command to run tests, e.g. python setup.py test
 script: tox
 
-# deploy new versions to PyPI
+# Assuming you have installed the travis-ci CLI tool, after you
+# create the Github repo and add it to Travis, run the
+# following command to finish PyPI deployment setup:
+# $ travis encrypt --add deploy.password
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
-  user: audreyr
+  user: sstbrg
   password:
     secure: PLEASE_REPLACE_ME
   on:
     tags: true
-    repo: audreyr/python_boilerplate
-    python: 2.7
+    repo: sstbrg/submovements
+    python: 3.6
