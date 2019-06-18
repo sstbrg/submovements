@@ -7,7 +7,7 @@ import pytest
 
 
 from submovements import submovements
-
+from DataProcessing import Preprocessor
 
 @pytest.fixture
 def response():
@@ -23,3 +23,9 @@ def test_content(response):
     """Sample pytest test function with the pytest fixture as an argument."""
     # from bs4 import BeautifulSoup
     # assert 'GitHub' in BeautifulSoup(response.content).title.string
+
+def test_preprocessor_instance():
+    pproc = Preprocessor()
+    assert isinstance(pproc, Preprocessor)
+
+
