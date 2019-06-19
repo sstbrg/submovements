@@ -13,6 +13,5 @@ if __name__ == '__main__':
         trial.save_as_csv(path_to_trials)
         pproc.plot(trial.velocity_data[['x', 'y']])
         pproc.plot(trial.filtered_velocity_data[['x', 'y']])
-
-        print(trial.velocity_data)
+        pproc.plot(trial.filtered_position_data[['x', 'y']])
         break

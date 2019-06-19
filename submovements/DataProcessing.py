@@ -25,22 +25,24 @@ class Trial(object):
     position_data = attr.ib(default=None)
     velocity_data = attr.ib(default=None)
     filtered_velocity_data = attr.ib(default=None)
+    filtered_position_data = attr.ib(default=None)
     events = attr.ib(default=None)
     raw_file_path = attr.ib(default='')
 
-    def preprocess(self, preprocessor, axes=('x', 'y', 'z'),
-                   sg_win_len=17, sg_polyorder=4, threshold=0.005):
+    def preprocess(self, preprocessor,
+                   axes=('x', 'y', 'z'),
+                   threshold=0.005):
         assert isinstance(preprocessor, Preprocessor)
 
-        filtered_velocity = preprocessor.filter_raw_data(
-            self.position_data[list(axes)],
-            window_len=sg_win_len,
-            polyorder=sg_polyorder,
-            deriv=1)
-        filtered_velocity = preprocessor.remove_baseline(
-            filtered_velocity, threshold=threshold)
 
-        self.filtered_velocity_data = filtered_velocity
+        self.filtered_position_data = preprocessor.filter_raw_data(
+            self.position_data[list(axes)])
+
+        self.filtered_velocity_data = self.filtered_position_data.diff().fillna(method='bfill')
+        self.filtered_velocity_data *= preprocessor.sample_rate
+
+        self.filtered_velocity_data = preprocessor.remove_baseline(
+            self.filtered_velocity_data, threshold=threshold)
 
     def save_as_csv(self, dest_folder):
         assert Path(dest_folder).is_dir(), \
@@ -135,14 +137,13 @@ class Preprocessor(object):
         normal_cutoff = cutoff / nyq
         return butter(order, normal_cutoff, btype='low', analog=False)
 
-    def butter_lowpass_filter(self, data, cutoff, fs, order=10):
+    def butter_lowpass_filter(self, data, cutoff, fs, order=2):
         b, a = self.butter_lowpass(cutoff, fs, order=order)
         y = filtfilt(b, a, data)
         return y
 
     def filter_raw_data(self, data_in: pd.DataFrame,
-                        lpf_on=False, window_len=5,
-                        deriv=1, polyorder=2):
+                        lpf_on=True):
         ###
         # This method applies the Savitsky-Golay filter
         # on a data frame.
@@ -168,7 +169,7 @@ class Preprocessor(object):
         if lpf_on:
             # 5hz low pass (zero phase)
             cutoff = 5
-            order = 10
+            order = 2
 
             for col in df:
                 df[col] = self.butter_lowpass_filter(df[col],
@@ -176,13 +177,6 @@ class Preprocessor(object):
                                                      fs=self.sample_rate,
                                                      order=order)
 
-        # we now apply a Savitzky-Golay filter to smooth the data
-        for col in df:
-            df[col] = savgol_filter(x=df[col],
-                                    window_length=window_len,
-                                    polyorder=polyorder,
-                                    deriv=deriv,
-                                    delta=dx)
         return df
 
     @staticmethod
