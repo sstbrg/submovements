@@ -28,6 +28,7 @@ class Trial(object):
     filtered_position_data = attr.ib(default=None)
     events = attr.ib(default=None)
     raw_file_path = attr.ib(default='')
+    id = attr.ib(default='')
 
     def preprocess(self, preprocessor,
                    axes=('x', 'y', 'z'),
@@ -73,8 +74,7 @@ class Trial(object):
 
         # maybe add to main as trial attribute
         id = np.full(shape=len(vx),
-                     fill_value=re.split(
-                         '\/', str(os.path.dirname(self.raw_file_path)))[-1]
+                     fill_value=self.id
                      )
         block = np.full(shape=len(vx), fill_value=self.block, dtype=np.int)
         rep = np.full(shape=len(vx), fill_value=self.rep, dtype=np.int)
@@ -138,6 +138,7 @@ class Preprocessor(object):
                 trial_out.block = int(trial_data[3])
                 trial_out.rep = int(os.path.splitext(trial_data[4])[0])
                 trial_out.raw_file_path = fn
+                trial_out.id = re.split('\\/', str(os.path.dirname(fn)))[-1]
                 yield trial_out
             except ValueError:
                 raise AssertionError(f'Could not load {fn}.')

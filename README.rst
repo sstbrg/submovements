@@ -44,7 +44,8 @@ Pre-processing (Preprocessor class)
 1. (x,y) coordinates as a function of time are extracted from every CSV file.
 2. Butterworth zero-phase of 4th order is applied on the (x,y) positions. Further filtering is possible by expanding the preprocessor class.
 3. d(x,y)/dt is calculated to yield velocities (Vx,Vy) as a function of time.
-4. To remove the duration where (Vx,Vy) are approximately zero we use thresholding on ||(Vx,Vy)||, such that the any data where ||(Vx,Vy)|| < threshold (0.001 by default) is removed, excluding a 0.1s portion around the time where motion took place.
+4. To remove the duration where (Vx,Vy) are approximately zero we use thresholding on ||(Vx,Vy)||, such that the any data where ||(Vx,Vy)|| < threshold (0.001 by default) is removed,
+excluding a 0.1s portion around the time where motion took place.
 5. The filtered velocity is saved under the Trial class for further processing.
 
 Trial processing (Trial class)
