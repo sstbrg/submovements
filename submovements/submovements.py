@@ -17,5 +17,5 @@ for trial in raw_data_gen:
     pproc.plot(trial.velocity_data[['x', 'y']])
     pproc.plot(trial.filtered_velocity_data[['x', 'y']])
 
-    print(trial)
+    print(trial.velocity_data)
     break

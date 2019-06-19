@@ -129,7 +129,7 @@ class Preprocessor(object):
         y = filtfilt(b, a, data)
         return y
 
-    def filter_raw_data(self, data_in:pd.DataFrame, window_len=5, deriv=1, polyorder=2):
+    def filter_raw_data(self, data_in:pd.DataFrame, lpf_on = False, window_len=5, deriv=1, polyorder=2):
         ###
         # This method applies the Savitsky-Golay filter on a data frame.
         # For example, the velocity is extracted by setting deriv=1 and data_in to position data.
@@ -145,12 +145,13 @@ class Preprocessor(object):
         # we start by filling NaNs in the data
         df = df.fillna(method='bfill')
 
-        # 5hz low pass (zero phase)
-        cutoff = 5 #hz
-        order = 10
+        if lpf_on:
+            # 5hz low pass (zero phase)
+            cutoff = 5 #hz
+            order = 10
 
-        for col in df:
-            df[col] = self.butter_lowpass_filter(df[col], cutoff=cutoff, fs=self.sample_rate, order=order)
+            for col in df:
+                df[col] = self.butter_lowpass_filter(df[col], cutoff=cutoff, fs=self.sample_rate, order=order)
 
 
         # we now apply a Savitzky-Golay filter to smooth the data
@@ -180,8 +181,8 @@ class Preprocessor(object):
         idx = df.loc[df >= threshold]
 
         # set data cutting limits
-        low_cut_index = idx.index.min()-0.3 if df.index.min() < idx.index.min()-0.3 else df.index.min()
-        high_cut_index = idx.index.max()+0.3 if df.index.max() > idx.index.max()+0.3 else df.index.max()
+        low_cut_index = idx.index.min()-0.1 if df.index.min() < idx.index.min()-0.1 else df.index.min()
+        high_cut_index = idx.index.max()+0.1 if df.index.max() > idx.index.max()+0.1 else df.index.max()
 
         return data_in.copy()[low_cut_index : high_cut_index]
 
