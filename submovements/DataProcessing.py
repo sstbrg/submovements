@@ -51,7 +51,10 @@ class Trial(object):
     filtered_position_data = attr.ib(default=None)
     events = attr.ib(default=None)
     raw_file_path = attr.ib(default='')
+    id = attr.ib(init = False)
     
+    def __attrs_post_init__(self):
+        self.id = re.split('\/', str(os.path.dirname(self.raw_file_path)))[-1]
 
     def preprocess(self, preprocessor,
                    axes=('x', 'y', 'z'),
