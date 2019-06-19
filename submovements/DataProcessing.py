@@ -138,7 +138,7 @@ class Preprocessor(object):
                 trial_out.block = int(trial_data[3])
                 trial_out.rep = int(os.path.splitext(trial_data[4])[0])
                 trial_out.raw_file_path = fn
-                trial_out.id = re.split('\\/', str(os.path.dirname(fn)))[-1]
+                trial_out.id = os.path.split(dir_path)[1]
                 yield trial_out
             except ValueError:
                 raise AssertionError(f'Could not load {fn}.')
