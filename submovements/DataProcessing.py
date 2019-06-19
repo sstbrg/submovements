@@ -2,12 +2,10 @@ import attr
 from glob import glob
 import os
 import pandas as pd
-from bokeh.plotting import figure, output_file, show
-from bokeh.models import ColumnDataSource
-from bokeh.models.tools import HoverTool
 import matplotlib.pyplot as plt
-from scipy.signal import savgol_filter, hilbert
+from scipy.signal import savgol_filter
 import numpy as np
+from scipy.signal import butter, filtfilt
 
 @attr.s
 class Trial(object):
@@ -24,7 +22,6 @@ class Trial(object):
     position_data = attr.ib(default=None)
     velocity_data = attr.ib(default=None)
     filtered_velocity_data = attr.ib(default=None)
-    #time = attr.ib(default=None)
     events = attr.ib(default=None)
     raw_file_path = attr.ib(default='')
 
@@ -42,6 +39,18 @@ class Trial(object):
 
         self.filtered_velocity_data = filtered_velocity
 
+    def save_as_csv(self, dest_folder):
+        ### TODO
+        # Method to export a Trial to csv
+        ###
+
+        df = self.filtered_velocity_data.copy()
+        df.columns = ['Vx', 'Vy']
+        filename = f"li_{self.stimulus}_{self.block}_{self.rep}.csv"
+        filepath = os.path.join(dest_folder, filename)
+
+        df.to_csv(filepath)
+
 @attr.s
 class Preprocessor(object):
     raw_paths = attr.ib(default='data')
@@ -54,26 +63,29 @@ class Preprocessor(object):
         # This is a generator which takes csv files from dir_path and yields Trials.
         ###
 
-        self.raw_paths = glob(os.path.join(dir_path, '*.csv'))
+        self.raw_paths = glob(os.path.join(dir_path, 'li_*.csv'))
         trial_out = Trial()
         for fn in self.raw_paths:
             try:
                 df = pd.read_csv(fn, names=self.raw_headers)
                 df = df.set_index('Time')
                 trial_out.position_data = df[['x','y','z']]
-                #trial_out.time = df[['Time']]
                 trial_out.events = df[['Event']]
                 trial_out.velocity_data = df[['x','y','z']].diff()
                 trial_data = os.path.split(fn)[1].split(sep='_')
-                trial_out.subject_id = trial_data[0]
                 trial_out.stimulus = trial_data[1] + '_' + trial_data[2]
                 trial_out.block = int(trial_data[3])
                 trial_out.rep = int(os.path.splitext(trial_data[4])[0])
                 trial_out.raw_file_path = fn
                 yield trial_out
-            except IOError:
-                print(f'{fn} was not loaded.')
+
+            except IndexError:
+                print(f'File does not contain trial data: {fn}')
                 continue
+
+            except IOError:
+                raise AssertionError(f'Could not load {fn}.')
+
 
     def load_single_file(self, file_path):
         ###
@@ -91,7 +103,8 @@ class Preprocessor(object):
         except IOError:
             raise AssertionError(f'{file_path} was not loaded.')
 
-    def plot(self, data_in: pd.DataFrame, mode='pandas', sample_factor: int = 10):
+    @staticmethod
+    def plot(data_in: pd.DataFrame, sample_factor: int = 10):
 
         ###
         # This is a plotting method that will work on a given DataFrame
@@ -100,24 +113,23 @@ class Preprocessor(object):
         # sample_factor dictates how many samples will be displayed (lower -> higher performance -> lower resolution).
         ###
 
-        if mode=='pandas':
-            plt.figure()
-            data_in.plot()
-            plt.show()
+        plt.figure()
+        data_in.plot()
+        plt.show()
 
-        elif mode=='bokeh':
-            sample = data_in.sample(sample_factor)
-            source = ColumnDataSource(sample)
-            f = figure()
-            f.line(x='Time', y='x', color='red', source=source)
-            f.line(x='Time', y='y', color='blue', source=source)
-            show(f)
-        else:
-            print(f'Mode {mode} is not supported.')
-            return None
+    @staticmethod
+    def butter_lowpass(cutoff, fs, order):
+        nyq = 0.5 * fs
+        normal_cutoff = cutoff / nyq
+        b, a = butter(order, normal_cutoff, btype='low', analog=False)
+        return b, a
 
+    def butter_lowpass_filter(self, data, cutoff, fs, order=10):
+        b, a = self.butter_lowpass(cutoff, fs, order=order)
+        y = filtfilt(b, a, data)
+        return y
 
-    def filter_raw_data(self, data_in:pd.DataFrame, window_len=9, deriv=1, polyorder=4):
+    def filter_raw_data(self, data_in:pd.DataFrame, lpf_on = False, window_len=5, deriv=1, polyorder=2):
         ###
         # This method applies the Savitsky-Golay filter on a data frame.
         # For example, the velocity is extracted by setting deriv=1 and data_in to position data.
@@ -128,12 +140,20 @@ class Preprocessor(object):
         ###
 
         df = data_in.copy()
-        #df = pd.concat([data_in, time_vec], axis=1)
-        #df = df.copy().set_index('Time')
         dx = df.index[1]
 
         # we start by filling NaNs in the data
         df = df.fillna(method='bfill')
+
+        if lpf_on:
+            # 5hz low pass (zero phase)
+            cutoff = 5 #hz
+            order = 10
+
+            for col in df:
+                df[col] = self.butter_lowpass_filter(df[col], cutoff=cutoff, fs=self.sample_rate, order=order)
+
+
         # we now apply a Savitzky-Golay filter to smooth the data
         for col in df:
             df[col] = savgol_filter(x=df[col],
@@ -143,7 +163,8 @@ class Preprocessor(object):
                                     delta=dx)
         return df
 
-    def remove_baseline(self, data_in:pd.DataFrame, threshold=0.005):
+    @staticmethod
+    def remove_baseline(data_in:pd.DataFrame, threshold=0.005):
         ### TODO: check if we need to filter out baseline data --after-- the motion...
         # This method takes a data frame of velocity data, calculates the normalized magnitude of
         # tangential velocity and filters out any data that's lower than a given threshold.
@@ -153,25 +174,15 @@ class Preprocessor(object):
         df = np.power(data_in, 2)
         df = df.sum(axis=1)
 
-        #min-max normalization
+        # min-max normalization
         df = (df - df.min()) / (df.max() - df.min())
 
+        # find data above threshold
+        idx = df.loc[df >= threshold]
 
-        #adaptive threshold
-        #df_fast = df.rolling(window=int(self.sample_rate/2)).std()
-        #df_slow = df.rolling(window=int(self.sample_rate)).std()
-        #threshold = np.abs(df_fast-df_slow)
+        # set data cutting limits
+        low_cut_index = idx.index.min()-0.1 if df.index.min() < idx.index.min()-0.1 else df.index.min()
+        high_cut_index = idx.index.max()+0.1 if df.index.max() > idx.index.max()+0.1 else df.index.max()
 
-        return data_in.copy()[df >= threshold]
-
-    def save_as_mat(self, data_in:pd.DataFrame, destination):
-        ### TODO
-        # Method to export a dataframe
-        ###
-
-        self.database_file_path = destination
-
-
-        pass
-
+        return data_in.copy()[low_cut_index : high_cut_index]
 
