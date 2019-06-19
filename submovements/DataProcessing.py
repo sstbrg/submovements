@@ -98,9 +98,6 @@ class Preprocessor(object):
                 trial_out.rep = int(os.path.splitext(trial_data[4])[0])
                 trial_out.raw_file_path = fn
                 yield trial_out
-            except IndexError:
-                print(f'{fn} has index error.')
-                continue
             except IOError:
                 print(f'{fn} was not loaded.')
                 continue
