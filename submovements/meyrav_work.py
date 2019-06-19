@@ -10,4 +10,5 @@ from scipy.signal import savgol_filter, hilbert
 if __name__ == "__main__":
     a = Subject('../1', r'C:\Users\meyra\Desktop\s')
     a.create_total_df()
+    #print(a.id)
     print(a.df_total)

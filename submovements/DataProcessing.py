@@ -8,7 +8,6 @@ from scipy.signal import butter, filtfilt
 from pathlib import Path
 import re
 
-
 @attr.s
 class Subject(object):
     dir_path = attr.ib(default='')
@@ -16,11 +15,11 @@ class Subject(object):
     df_folder = attr.ib(default='')
 
     def __attrs_post_init__(self):
-        self.id = re.split('\/', str(os.path.dirname(self.dir_path)))[-1]
+        self.id = os.path.split(self.dir_path)[1]
 
     def create_total_df(self):
         self.df_total = pd.DataFrame({'Vx': [], 'Vy': [], 'Rep': [], 'Block': [], 'Time': [], 'Condition': [],
-                                      'ID': []})  # creating an empty array for concatination use later
+                                      'ID': [], 'pos x':[], 'pos y':[]})  # creating an empty array for concatination use later
         pproc = Preprocessor()
         trial_gen = pproc.load_df_from_directory_gen(self.dir_path)
         for trial in trial_gen:
@@ -30,7 +29,6 @@ class Subject(object):
             self.df_total = pd.concat([self.df_total, df])
         self.df_total = self.df_total.set_index(['ID', 'Condition', 'Block', 'Rep', 'Time']).sort_values(
             ['ID', 'Condition', 'Block', 'Rep'], ascending=True)
-
 
 @attr.s
 class Trial(object):
@@ -94,15 +92,15 @@ class Trial(object):
         vy = self.filtered_velocity_data['y']
         time = np.arange(len(vx))    # change later !!!!
         condition = np.full(shape=len(vx), fill_value=self.stimulus)
-
-        # maybe add to main as trial attribute
         id = np.full(shape=len(vx),
                      fill_value=self.id
                      )
         block = np.full(shape=len(vx), fill_value=self.block, dtype=np.int)
         rep = np.full(shape=len(vx), fill_value=self.rep, dtype=np.int)
+        pos_x = self.filtered_position_data['x']
+        pos_y = self.filtered_position_data['y']
         return pd.DataFrame({'Vx': vx, 'Vy': vy, 'Rep': rep, 'Block': block,
-                             'Time': time, 'Condition': condition, 'ID': id})
+                             'Time': time, 'Condition': condition, 'ID': id, 'pos x':pos_x, 'pos y':pos_y})
 
     def save_df(self, df, dest_folder):
         ###
@@ -161,7 +159,7 @@ class Preprocessor(object):
                 trial_out.block = int(trial_data[3])
                 trial_out.rep = int(os.path.splitext(trial_data[4])[0])
                 trial_out.raw_file_path = fn
-                trial_out.id = re.split('\\/', str(os.path.dirname(fn)))[-1]
+                trial_out.id = os.path.split(dir_path)[1]
                 yield trial_out
             except ValueError:
                 raise AssertionError(f'Could not load {fn}.')
