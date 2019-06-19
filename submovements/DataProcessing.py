@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from scipy.signal import savgol_filter
 import numpy as np
 from scipy.signal import butter, filtfilt
+from pathlib import Path
 
 @attr.s
 class Trial(object):
@@ -31,6 +32,8 @@ class Trial(object):
             f'Raw data path: {self.raw_file_path}\n'
 
     def preprocess(self, preprocessor, axes=('x','y','z'), sg_win_len = 17, sg_polyorder=4, threshold=0.005):
+        assert isinstance(preprocessor, Preprocessor)
+
         filtered_velocity = preprocessor.filter_raw_data(self.position_data[list(axes)],
                                                   window_len=sg_win_len,
                                                   polyorder=sg_polyorder,
@@ -40,19 +43,24 @@ class Trial(object):
         self.filtered_velocity_data = filtered_velocity
 
     def save_as_csv(self, dest_folder):
-        ### TODO
-        # Method to export a Trial to csv
-        ###
+        assert Path(dest_folder).is_dir(), f'Destination directory does not exists: {dest_folder}'
 
+        dest_folder = Path(dest_folder)
         df = self.filtered_velocity_data.copy()
         df.columns = ['Vx', 'Vy']
         filename = f"li_{self.stimulus}_{self.block}_{self.rep}.csv"
-        filepath = os.path.join(dest_folder, filename)
+        filepath = dest_folder.joinpath(filename)
 
         df.to_csv(filepath)
 
+
 @attr.s
 class Preprocessor(object):
+
+    ###
+    # This is a Preprocessing entity which can filter, cut-via-threshold and plot DataFrames
+    ###
+
     raw_paths = attr.ib(default='data')
     database_file_path = attr.ib(default='data\\database.mat')
     sample_rate = attr.ib(default=240)
@@ -62,8 +70,11 @@ class Preprocessor(object):
         ###
         # This is a generator which takes csv files from dir_path and yields Trials.
         ###
+        assert Path(dir_path).is_dir(), f'Destination directory does not exists: {dir_path}'
 
-        self.raw_paths = glob(os.path.join(dir_path, 'li_*.csv'))
+        self.raw_paths = glob(str(Path(dir_path).joinpath('li_*.csv')))
+        assert len(self.raw_paths) > 0, f'No source files found!'
+
         trial_out = Trial()
         for fn in self.raw_paths:
             try:
@@ -91,6 +102,8 @@ class Preprocessor(object):
         ###
         # This method loads a single csv and yields a single Trial
         ###
+        assert Path(file_path).is_file(), f'File does not exists: {file_path}'
+        file_path = Path(file_path)
 
         trial_out = Trial()
         try:
@@ -104,14 +117,14 @@ class Preprocessor(object):
             raise AssertionError(f'{file_path} was not loaded.')
 
     @staticmethod
-    def plot(data_in: pd.DataFrame, sample_factor: int = 10):
+    def plot(data_in: pd.DataFrame):
 
         ###
         # This is a plotting method that will work on a given DataFrame
         # mode = 'pandas' will plot using Pandas and matplotlib.
-        # mode = 'bokeh' will plot using bokeh.
-        # sample_factor dictates how many samples will be displayed (lower -> higher performance -> lower resolution).
         ###
+        assert isinstance(data_in, pd.DataFrame)
+        assert data_in.empty, f'No data to plot!'
 
         plt.figure()
         data_in.plot()
@@ -121,8 +134,7 @@ class Preprocessor(object):
     def butter_lowpass(cutoff, fs, order):
         nyq = 0.5 * fs
         normal_cutoff = cutoff / nyq
-        b, a = butter(order, normal_cutoff, btype='low', analog=False)
-        return b, a
+        return butter(order, normal_cutoff, btype='low', analog=False)
 
     def butter_lowpass_filter(self, data, cutoff, fs, order=10):
         b, a = self.butter_lowpass(cutoff, fs, order=order)
@@ -138,6 +150,9 @@ class Preprocessor(object):
         # window_len - how many samples are used for polynomial fitting of order polyorder.
         # deriv=n controls whether we smooth the data or its n'th derivative.
         ###
+
+        assert isinstance(data_in, pd.DataFrame)
+        assert data_in.empty, f'No data to process!'
 
         df = data_in.copy()
         dx = df.index[1]
@@ -165,10 +180,14 @@ class Preprocessor(object):
 
     @staticmethod
     def remove_baseline(data_in:pd.DataFrame, threshold=0.005):
-        ### TODO: check if we need to filter out baseline data --after-- the motion...
+        ###
         # This method takes a data frame of velocity data, calculates the normalized magnitude of
         # tangential velocity and filters out any data that's lower than a given threshold.
         ###
+
+        assert isinstance(data_in, pd.DataFrame)
+        assert data_in.empty, f'No data to process!'
+        assert threshold > 0, f'Threshold must be greater or equal than zero.'
 
         # calculate absolute velocity
         df = np.power(data_in, 2)
