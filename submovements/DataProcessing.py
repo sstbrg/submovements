@@ -43,6 +43,10 @@ class Trial(object):
         self.filtered_velocity_data = preprocessor.remove_baseline(
             self.filtered_velocity_data, threshold=threshold)
 
+        self.filtered_position_data = self.filtered_position_data[
+                                      self.filtered_velocity_data.index.min():
+                                      self.filtered_velocity_data.index.max()]
+
     def save_as_csv(self, dest_folder):
         assert Path(dest_folder).is_dir(), \
             f'Destination directory does not exists: {dest_folder}'
@@ -74,6 +78,7 @@ class Preprocessor(object):
         # This is a generator which takes csv
         # files from dir_path and yields Trials.
         ###
+
         assert Path(dir_path).is_dir(), \
             f'Destination directory does not exist ' \
             f'or is not a directory: {dir_path}'
@@ -102,6 +107,7 @@ class Preprocessor(object):
         ###
         # This method loads a single csv and yields a single Trial
         ###
+
         assert Path(file_path).is_file(), f'File does not exists: {file_path}'
         file_path = Path(file_path)
 

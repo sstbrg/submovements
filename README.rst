@@ -27,10 +27,30 @@ Our goal is to detect sub-movements from motion data.
 * Documentation: https://submovements.readthedocs.io.
 
 
-Features
+Introduction
 --------
 
-* TODO
+This software works on a pipeline basis.
+
+Input
+~~~~~~~~~~~~~~~
+The input is a directory of trials which are saved as CSV files with the following file names:
+xx_stimulus_side_block#_repetition#.csv
+
+Other .csv files with a different name format are ignored.
+
+Pre-processing (Preprocessor class)
+~~~~~~~~~~~~~~~~~~~~
+1. (x,y) coordinates as a function of time are extracted from every CSV file.
+2. Butterworth zero-phase of 4th order is applied on the (x,y) positions. Further filtering is possible by expanding the preprocessor class.
+3. d(x,y)/dt is calculated to yield velocities (Vx,Vy) as a function of time.
+4. To remove the duration where (Vx,Vy) are approximately zero we use thresholding on ||(Vx,Vy)||, such that the any data where ||(Vx,Vy)|| < threshold (0.001 by default) is removed, excluding a 0.1s portion around the time where motion took place.
+5. The filtered velocity is saved under the Trial class for further processing.
+
+Trial processing (Trial class)
+~~~~~~~~~~~~~~~~~
+
+TO-DO
 
 Credits
 -------
