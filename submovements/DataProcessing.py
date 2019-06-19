@@ -26,11 +26,6 @@ class Trial(object):
     events = attr.ib(default=None)
     raw_file_path = attr.ib(default='')
 
-    def __str__(self):
-        return f'Block/Repetition: {self.block}/{self.rep}\n' \
-            f'Stimulus: {self.stimulus}\n' \
-            f'Raw data path: {self.raw_file_path}\n'
-
     def preprocess(self, preprocessor, axes=('x','y','z'), sg_win_len = 17, sg_polyorder=4, threshold=0.005):
         assert isinstance(preprocessor, Preprocessor)
 
@@ -62,7 +57,6 @@ class Preprocessor(object):
     ###
 
     raw_paths = attr.ib(default='data')
-    database_file_path = attr.ib(default='data\\database.mat')
     sample_rate = attr.ib(default=240)
     raw_headers = attr.ib(default=['SampleNum', 'x', 'y', 'z', 'phi', 'theta', 'psi', 'Time', 'Event'])
 
