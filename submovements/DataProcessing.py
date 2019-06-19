@@ -7,7 +7,7 @@ from scipy.signal import savgol_filter
 import numpy as np
 from scipy.signal import butter, filtfilt
 from pathlib import Path
-
+import re
 
 @attr.s
 class Trial(object):
@@ -33,7 +33,6 @@ class Trial(object):
                    axes=('x', 'y', 'z'),
                    threshold=0.005):
         assert isinstance(preprocessor, Preprocessor)
-
 
         self.filtered_position_data = preprocessor.filter_raw_data(
             self.position_data[list(axes)])
@@ -161,7 +160,6 @@ class Preprocessor(object):
         assert not data_in.empty, f'No data to process!'
 
         df = data_in.copy()
-        dx = df.index[1]
 
         # we start by filling NaNs in the data
         df = df.fillna(method='bfill')
