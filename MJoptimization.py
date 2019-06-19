@@ -21,7 +21,7 @@ class MJxy:
     Ay = displacement resulting from the movement (y): PosY(t=max) - PosY(t=1)
  
     """
-    Trial = attr.ib(default=1)
+    Trial = attr.ib()
     num_block = attr.ib(default=Trial.block)
     rep = attr.ib(default=Trial.rep)
     stimulus = attr.ib(default=Trial.stimulus)
