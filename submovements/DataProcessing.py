@@ -30,6 +30,11 @@ class Subject(object):
         self.df_total = self.df_total.set_index(['ID', 'Condition', 'Block', 'Rep', 'Time']).sort_values(
             ['ID', 'Condition', 'Block', 'Rep'], ascending=True)
 
+    def stimuli_df(self,stimuli):
+        idx = pd.IndexSlice
+        return self.df_total.loc[idx[:,stimuli,:,:,:],:]
+
+
 @attr.s
 class Trial(object):
     ###
