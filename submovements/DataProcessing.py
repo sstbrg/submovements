@@ -180,8 +180,8 @@ class Preprocessor(object):
         idx = df.loc[df >= threshold]
 
         # set data cutting limits
-        low_cut_index = idx.index.min()-0.2 if df.index.min() < idx.index.min()-0.2 else df.index.min()
-        high_cut_index = idx.index.max()+0.2 if df.index.max() > idx.index.max()+0.2 else df.index.max()
+        low_cut_index = idx.index.min()-0.3 if df.index.min() < idx.index.min()-0.3 else df.index.min()
+        high_cut_index = idx.index.max()+0.3 if df.index.max() > idx.index.max()+0.3 else df.index.max()
 
         return data_in.copy()[low_cut_index : high_cut_index]
 
