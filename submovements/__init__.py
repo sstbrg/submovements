@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Top-level package for submovements."""
 
 __author__ = """Stas Steinberg"""
