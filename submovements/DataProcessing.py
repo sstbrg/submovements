@@ -3,11 +3,11 @@ from glob import glob
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-from scipy.signal import savgol_filter
 import numpy as np
 from scipy.signal import butter, filtfilt
 from pathlib import Path
 import re
+
 
 @attr.s
 class Subject(object):
@@ -35,7 +35,7 @@ class Subject(object):
 @attr.s
 class Trial(object):
     ###
-    # Trial(i,j) represents data from repetition i from block j
+    # Trial(i,j) represents data from repetition i and block j
     # Using the preprocessor we can stream data from a
     # directory and create trials.
     # Using the preprocessor we can preprocess the trial
@@ -51,10 +51,7 @@ class Trial(object):
     filtered_position_data = attr.ib(default=None)
     events = attr.ib(default=None)
     raw_file_path = attr.ib(default='')
-    id = attr.ib(init = False)
-    
-    def __attrs_post_init__(self):
-        self.id = re.split('\/', str(os.path.dirname(self.raw_file_path)))[-1]
+    id = attr.ib(default='')
 
     def preprocess(self, preprocessor,
                    axes=('x', 'y', 'z'),
@@ -64,11 +61,16 @@ class Trial(object):
         self.filtered_position_data = preprocessor.filter_raw_data(
             self.position_data[list(axes)])
 
-        self.filtered_velocity_data = self.filtered_position_data.diff().fillna(method='bfill')
+        self.filtered_velocity_data = \
+            self.filtered_position_data.diff().fillna(method='bfill')
         self.filtered_velocity_data *= preprocessor.sample_rate
 
         self.filtered_velocity_data = preprocessor.remove_baseline(
             self.filtered_velocity_data, threshold=threshold)
+
+        self.filtered_position_data = self.filtered_position_data[
+                                      self.filtered_velocity_data.index.min():
+                                      self.filtered_velocity_data.index.max()]
 
     def save_as_csv(self, dest_folder):
         assert Path(dest_folder).is_dir(), \
@@ -82,32 +84,43 @@ class Trial(object):
 
         df.to_csv(filepath)
 
-
     def create_df(self):
-        ''' creates df for every trial with the columns:
-            Vx, Vy, Condition, Time, ID, Block, Repetition'''
+        ###
+        # creates df for every trial with the columns:
+        # Vx, Vy, Condition, Time, ID, Block, Repetition
+        ###
+
         vx = self.filtered_velocity_data['x']
         vy = self.filtered_velocity_data['y']
         time = np.arange(len(vx))    # change later !!!!
-        condition = np.full(shape=len(vx),fill_value=self.stimulus)
-        id = np.full(shape=len(vx),fill_value=re.split('\\/',str(os.path.dirname(self.raw_file_path)))[-1]) #maybe add to main as trial attribute
-        block = np.full(shape=len(vx),fill_value=self.block, dtype=np.int)
-        rep = np.full(shape=len(vx),fill_value=self.rep, dtype=np.int)
-        return pd.DataFrame({'Vx':vx,'Vy':vy,'Rep':rep,'Block':block,'Time':time,'Condition':condition,'ID':id})
+        condition = np.full(shape=len(vx), fill_value=self.stimulus)
 
-    def save_df(self, df,dest_folder):
-        '''Save recived data frame of the trial as a '_df.csv' '''
+        # maybe add to main as trial attribute
+        id = np.full(shape=len(vx),
+                     fill_value=self.id
+                     )
+        block = np.full(shape=len(vx), fill_value=self.block, dtype=np.int)
+        rep = np.full(shape=len(vx), fill_value=self.rep, dtype=np.int)
+        return pd.DataFrame({'Vx': vx, 'Vy': vy, 'Rep': rep, 'Block': block,
+                             'Time': time, 'Condition': condition, 'ID': id})
+
+    def save_df(self, df, dest_folder):
+        ###
+        # Save recived data frame of the trial as a '_df.csv'
+        ###
+
         if isinstance(df, pd.DataFrame):
             fname = f"{self.stimulus}_{self.block}_{self.rep}_df.csv"
-            path = os.path.join(dest_folder,fname)
+            path = os.path.join(dest_folder, fname)
             if os.path.isdir(dest_folder):
                 df.to_csv(path)
             else:
                 try:
                     os.mkdir(dest_folder)
                     df.to_csv(path)
-                except OSError:  
-                    print ("Creation of the directory %s failed" % path)
+                except OSError:
+                    print("Creation of the directory %s failed" % path)
+
 
 @attr.s
 class Preprocessor(object):
@@ -127,6 +140,7 @@ class Preprocessor(object):
         # This is a generator which takes csv
         # files from dir_path and yields Trials.
         ###
+
         assert Path(dir_path).is_dir(), \
             f'Destination directory does not exist ' \
             f'or is not a directory: {dir_path}'
@@ -147,6 +161,7 @@ class Preprocessor(object):
                 trial_out.block = int(trial_data[3])
                 trial_out.rep = int(os.path.splitext(trial_data[4])[0])
                 trial_out.raw_file_path = fn
+                trial_out.id = re.split('\\/', str(os.path.dirname(fn)))[-1]
                 yield trial_out
             except ValueError:
                 raise AssertionError(f'Could not load {fn}.')
@@ -155,6 +170,7 @@ class Preprocessor(object):
         ###
         # This method loads a single csv and yields a single Trial
         ###
+
         assert Path(file_path).is_file(), f'File does not exists: {file_path}'
         file_path = Path(file_path)
 
@@ -227,7 +243,6 @@ class Preprocessor(object):
                                                      cutoff=cutoff,
                                                      fs=self.sample_rate,
                                                      order=order)
-
         return df
 
     @staticmethod
