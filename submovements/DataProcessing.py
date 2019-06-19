@@ -3,16 +3,16 @@ from glob import glob
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-from scipy.signal import savgol_filter
 import numpy as np
 from scipy.signal import butter, filtfilt
 from pathlib import Path
 import re
 
+
 @attr.s
 class Trial(object):
     ###
-    # Trial(i,j) represents data from repetition i from block j
+    # Trial(i,j) represents data from repetition i and block j
     # Using the preprocessor we can stream data from a
     # directory and create trials.
     # Using the preprocessor we can preprocess the trial
@@ -37,7 +37,8 @@ class Trial(object):
         self.filtered_position_data = preprocessor.filter_raw_data(
             self.position_data[list(axes)])
 
-        self.filtered_velocity_data = self.filtered_position_data.diff().fillna(method='bfill')
+        self.filtered_velocity_data = \
+            self.filtered_position_data.diff().fillna(method='bfill')
         self.filtered_velocity_data *= preprocessor.sample_rate
 
         self.filtered_velocity_data = preprocessor.remove_baseline(
@@ -59,32 +60,44 @@ class Trial(object):
 
         df.to_csv(filepath)
 
-
     def create_df(self):
-        ''' creates df for every trial with the columns:
-            Vx, Vy, Condition, Time, ID, Block, Repetition'''
+        ###
+        # creates df for every trial with the columns:
+        # Vx, Vy, Condition, Time, ID, Block, Repetition
+        ###
+
         vx = self.filtered_velocity_data['x']
         vy = self.filtered_velocity_data['y']
         time = np.arange(len(vx))    # change later !!!!
-        condition = np.full(shape=len(vx),fill_value=self.stimulus)
-        id = np.full(shape=len(vx),fill_value=re.split('\/',str(os.path.dirname(self.raw_file_path)))[-1]) #maybe add to main as trial attribute
-        block = np.full(shape=len(vx),fill_value=self.block, dtype=np.int)
-        rep = np.full(shape=len(vx),fill_value=self.rep, dtype=np.int)
-        return pd.DataFrame({'Vx':vx,'Vy':vy,'Rep':rep,'Block':block,'Time':time,'Condition':condition,'ID':id})
+        condition = np.full(shape=len(vx), fill_value=self.stimulus)
 
-    def save_df(self, df,dest_folder):
-        '''Save recived data frame of the trial as a '_df.csv' '''
+        # maybe add to main as trial attribute
+        id = np.full(shape=len(vx),
+                     fill_value=re.split(
+                         '\/', str(os.path.dirname(self.raw_file_path)))[-1]
+                     )
+        block = np.full(shape=len(vx), fill_value=self.block, dtype=np.int)
+        rep = np.full(shape=len(vx), fill_value=self.rep, dtype=np.int)
+        return pd.DataFrame({'Vx': vx, 'Vy': vy, 'Rep': rep, 'Block': block,
+                             'Time': time, 'Condition': condition, 'ID': id})
+
+    def save_df(self, df, dest_folder):
+        ###
+        # Save recived data frame of the trial as a '_df.csv'
+        ###
+
         if isinstance(df, pd.DataFrame):
             fname = f"{self.stimulus}_{self.block}_{self.rep}_df.csv"
-            path = os.path.join(dest_folder,fname)
+            path = os.path.join(dest_folder, fname)
             if os.path.isdir(dest_folder):
                 df.to_csv(path)
             else:
                 try:
                     os.mkdir(dest_folder)
                     df.to_csv(path)
-                except OSError:  
-                    print ("Creation of the directory %s failed" % path)
+                except OSError:
+                    print("Creation of the directory %s failed" % path)
+
 
 @attr.s
 class Preprocessor(object):
@@ -206,7 +219,6 @@ class Preprocessor(object):
                                                      cutoff=cutoff,
                                                      fs=self.sample_rate,
                                                      order=order)
-
         return df
 
     @staticmethod
