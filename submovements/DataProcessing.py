@@ -13,7 +13,7 @@ class Subject(object):
     dir_path = attr.ib(default='')
     id = attr.ib(init=False)
     df_folder = attr.ib(default='')
-
+#
     def __attrs_post_init__(self):
         self.id = os.path.split(self.dir_path)[1]
 
