@@ -56,6 +56,32 @@ class Trial(object):
         df.to_csv(filepath)
 
 
+    def create_df(self):
+        ''' creates df for every trial with the columns:
+            Vx, Vy, Condition, Time, ID, Block, Repetition'''
+        vx = self.filtered_velocity_data['x']
+        vy = self.filtered_velocity_data['y']
+        time = np.arange(len(vx))    # change later !!!!
+        condition = np.full(shape=len(vx),fill_value=self.stimulus)
+        id = np.full(shape=len(vx),fill_value=re.split('\/',str(os.path.dirname(self.raw_file_path)))[-1]) #maybe add to main as trial attribute
+        block = np.full(shape=len(vx),fill_value=self.block, dtype=np.int)
+        rep = np.full(shape=len(vx),fill_value=self.rep, dtype=np.int)
+        return pd.DataFrame({'Vx':vx,'Vy':vy,'Rep':rep,'Block':block,'Time':time,'Condition':condition,'ID':id})
+
+    def save_df(self, df,dest_folder):
+        '''Save recived data frame of the trial as a '_df.csv' '''
+        if isinstance(df, pd.DataFrame):
+            fname = f"{self.stimulus}_{self.block}_{self.rep}_df.csv"
+            path = os.path.join(dest_folder,fname)
+            if os.path.isdir(dest_folder):
+                df.to_csv(path)
+            else:
+                try:
+                    os.mkdir(dest_folder)
+                    df.to_csv(path)
+                except OSError:  
+                    print ("Creation of the directory %s failed" % path)
+
 @attr.s
 class Preprocessor(object):
 
