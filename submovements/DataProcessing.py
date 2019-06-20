@@ -60,7 +60,7 @@ class Subject(object):
                     sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[1,1])
         plt.show()
                    
-def stimuli_plot_vy(self,num_of_trials):
+    def stimuli_plot_vy(self,num_of_trials):
         fig, axes = plt.subplots(2, 2)# add name to subplots
         plt.xlabel('Time (sec)')
         plt.ylabel('Vy (cm/sec)')
