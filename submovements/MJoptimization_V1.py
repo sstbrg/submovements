@@ -63,5 +63,5 @@ class MJxy:
 
     
 
-
+df = MJxy(1,1,1,)
 
