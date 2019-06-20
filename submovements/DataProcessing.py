@@ -7,21 +7,25 @@ import numpy as np
 from scipy.signal import butter, filtfilt
 from pathlib import Path
 import re
-import seaborn as sns; sns.set()
+import seaborn as sns;
+
+sns.set()
+
 
 @attr.s
 class Subject(object):
     dir_path = attr.ib(default='')
     id = attr.ib(init=False)
     df_folder = attr.ib(default='')
-    df_dict = attr.ib({'square_left':[],'square_right':[],'tri_left':[],'tri_right':[]})
+    df_dict = attr.ib({'square_left': [], 'square_right': [], 'tri_left': [], 'tri_right': []})
 
     def __attrs_post_init__(self):
         self.id = os.path.split(self.dir_path)[1]
 
     def create_total_df(self):
         self.df_total = pd.DataFrame({'Vx': [], 'Vy': [], 'Rep': [], 'Block': [], 'Time': [], 'Condition': [],
-                                      'ID': [], 'pos x':[], 'pos y':[]})  # creating an empty array for concatination use later
+                                      'ID': [], 'pos x': [],
+                                      'pos y': []})  # creating an empty array for concatination use later
         pproc = Preprocessor()
         trial_gen = pproc.load_df_from_directory_gen(self.dir_path)
         for trial in trial_gen:
@@ -29,59 +33,58 @@ class Subject(object):
             df = trial.create_df()
             trial.save_df(df, self.df_folder)
             for key in self.df_dict:
-                if key==trial.stimulus:
+                if key == trial.stimulus:
                     self.df_dict[key].append(df)
             self.df_total = pd.concat([self.df_total, df])
         self.df_total = self.df_total.set_index(['ID', 'Condition', 'Block', 'Rep', 'Time']).sort_values(
             ['ID', 'Condition', 'Block', 'Rep'], ascending=True)
 
-    
-    def stimuli_plot_vx(self,num_of_trials):
-        fig, axes = plt.subplots(2, 2)# add name to subplots
+    def stimuli_plot_vx(self, num_of_trials):
+        fig, axes = plt.subplots(2, 2)  # add name to subplots
         plt.xlabel('Time (sec)')
         plt.ylabel('Vx (cm/sec)')
-        for n,key in enumerate(self.df_dict):
-            if n==0:
-                axes[0,0].set_title(key)
-            if n==1:
-                axes[0,1].set_title(key)
-            if n==2:
-                axes[1,0].set_title(key)
-            if n==3:
-                axes[1,1].set_title(key)
+        for n, key in enumerate(self.df_dict):
+            if n == 0:
+                axes[0, 0].set_title(key)
+            if n == 1:
+                axes[0, 1].set_title(key)
+            if n == 2:
+                axes[1, 0].set_title(key)
+            if n == 3:
+                axes[1, 1].set_title(key)
             for trial in range(num_of_trials):
-                if n==0:
-                    sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[0,0])
-                if n==1:
-                    sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[0,1])
-                if n==2:
-                    sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[1,0])
-                if n==3:
-                    sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[1,1])
+                if n == 0:
+                    sns.lineplot(x="Time", y="Vx", data=self.df_dict[key][trial], ax=axes[0, 0])
+                if n == 1:
+                    sns.lineplot(x="Time", y="Vx", data=self.df_dict[key][trial], ax=axes[0, 1])
+                if n == 2:
+                    sns.lineplot(x="Time", y="Vx", data=self.df_dict[key][trial], ax=axes[1, 0])
+                if n == 3:
+                    sns.lineplot(x="Time", y="Vx", data=self.df_dict[key][trial], ax=axes[1, 1])
         plt.show()
-                   
-    def stimuli_plot_vy(self,num_of_trials):
-        fig, axes = plt.subplots(2, 2)# add name to subplots
+
+    def stimuli_plot_vy(self, num_of_trials):
+        fig, axes = plt.subplots(2, 2)  # add name to subplots
         plt.xlabel('Time (sec)')
         plt.ylabel('Vy (cm/sec)')
-        for n,key in enumerate(self.df_dict):
-            if n==0:
-                axes[0,0].set_title(key)
-            if n==1:
-                axes[0,1].set_title(key)
-            if n==2:
-                axes[1,0].set_title(key)
-            if n==3:
-                axes[1,1].set_title(key)
+        for n, key in enumerate(self.df_dict):
+            if n == 0:
+                axes[0, 0].set_title(key)
+            if n == 1:
+                axes[0, 1].set_title(key)
+            if n == 2:
+                axes[1, 0].set_title(key)
+            if n == 3:
+                axes[1, 1].set_title(key)
             for trial in range(num_of_trials):
-                if n==0:
-                    sns.lineplot(x="Time", y="Vy", data= self.df_dict[key][trial], ax=axes[0,0])
-                if n==1:
-                    sns.lineplot(x="Time", y="Vy", data= self.df_dict[key][trial], ax=axes[0,1])
-                if n==2:
-                    sns.lineplot(x="Time", y="Vy", data= self.df_dict[key][trial], ax=axes[1,0])
-                if n==3:
-                    sns.lineplot(x="Time", y="Vy", data= self.df_dict[key][trial], ax=axes[1,1])
+                if n == 0:
+                    sns.lineplot(x="Time", y="Vy", data=self.df_dict[key][trial], ax=axes[0, 0])
+                if n == 1:
+                    sns.lineplot(x="Time", y="Vy", data=self.df_dict[key][trial], ax=axes[0, 1])
+                if n == 2:
+                    sns.lineplot(x="Time", y="Vy", data=self.df_dict[key][trial], ax=axes[1, 0])
+                if n == 3:
+                    sns.lineplot(x="Time", y="Vy", data=self.df_dict[key][trial], ax=axes[1, 1])
         plt.show()
 
 
@@ -109,16 +112,16 @@ class Trial(object):
                    threshold=0.05):
         assert isinstance(preprocessor, Preprocessor)
 
-        cols=list(cols)
+        cols = list(cols)
         self.data[cols] = preprocessor.filter_raw_data(self.data[cols])
 
         velocity_cols = [f'V{q}' for q in cols]
         self.data[velocity_cols] = preprocessor.sample_rate * \
-                                             self.data[cols].diff().fillna(method='bfill')
+                                   self.data[cols].diff().fillna(method='bfill')
 
         self.data = preprocessor.remove_baseline(self.data, cols=velocity_cols, threshold=threshold)
 
-        self.data = self.data.set_index(self.data['Time']-self.data['Time'][0])
+        self.data = self.data.set_index(self.data['Time'] - self.data['Time'][0])
 
     def save_as_csv(self, dest_folder):
         assert Path(dest_folder).is_dir(), \
@@ -148,7 +151,7 @@ class Trial(object):
         block = np.full(shape=len(vx), fill_value=self.block, dtype=np.int)
         rep = np.full(shape=len(vx), fill_value=self.rep, dtype=np.int)
         return pd.DataFrame({'Vx': vx, 'Vy': vy, 'Rep': rep, 'Block': block,
-                             'Time': time, 'Condition': condition, 'ID': id, 'pos x':pos_x, 'pos y':pos_y})
+                             'Time': time, 'Condition': condition, 'ID': id, 'pos x': pos_x, 'pos y': pos_y})
 
     def save_df(self, df, dest_folder):
         ###
@@ -168,7 +171,6 @@ class Trial(object):
                     print("Creation of the directory %s failed" % path)
 
 
-
 @attr.s
 class Preprocessor():
     ###
@@ -176,7 +178,7 @@ class Preprocessor():
     # cut-via-threshold and plot DataFrames
     ###
 
-    raw_paths = attr.ib(default='data') # Path list of all the raw data files
+    raw_paths = attr.ib(default='data')  # Path list of all the raw data files
     sample_rate = attr.ib(default=240)  # Sample rate the raw data is sampled at
 
     raw_headers = attr.ib(default=['SampleNum', 'x', 'y', 'z',
@@ -223,7 +225,7 @@ class Preprocessor():
 
         assert Path(file_path).is_file(), f'File does not exists: {file_path}'
         file_path = Path(file_path)
-        cols=list(cols)
+        cols = list(cols)
         trial_out = Trial()
         try:
             df = pd.read_csv(file_path, names=self.raw_headers)
@@ -323,11 +325,11 @@ class Preprocessor():
         idx = df.loc[df >= threshold]
 
         # expand data cutting limits
-        low_cut_index = int(idx.index[0]-0.1*self.sample_rate \
-            if df.index.min() < idx.index[0]-0.1*self.sample_rate \
-            else df.index.min())
-        high_cut_index = int(idx.index[-1]+0.1*self.sample_rate \
-            if df.index.max() > idx.index[-1]+0.1*self.sample_rate \
-            else df.index.max())
+        low_cut_index = int(idx.index[0] - 0.1 * self.sample_rate \
+                                if df.index.min() < idx.index[0] - 0.1 * self.sample_rate \
+                                else df.index.min())
+        high_cut_index = int(idx.index[-1] + 0.1 * self.sample_rate \
+                                 if df.index.max() > idx.index[-1] + 0.1 * self.sample_rate \
+                                 else df.index.max())
 
         return data_in.copy()[low_cut_index:high_cut_index].reset_index(drop=True)
