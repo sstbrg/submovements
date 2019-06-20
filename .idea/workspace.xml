@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/submovements/fit_submovements.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1547">
-              <caret line="91" selection-start-line="91" selection-end-line="91" />
+            <state relative-caret-position="1241">
+              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/submovements/DataProcessing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="374">
+              <caret line="190" lean-forward="true" selection-start-line="190" selection-end-line="190" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -66,6 +66,7 @@
         <option value="$PROJECT_DIR$/tests/test_submovements.py" />
         <option value="$PROJECT_DIR$/submovements/MJoptimization_V1.py" />
         <option value="$PROJECT_DIR$/submovements/submovements.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/submovements/fit_submovements.py" />
         <option value="$PROJECT_DIR$/submovements/DataProcessing.py" />
       </list>
@@ -286,12 +287,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83194000" />
+    <option name="totallyTimeSpent" value="84226000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21748401" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21748401" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -305,7 +306,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32827735" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32827735" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -528,11 +529,6 @@ plt.show()</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-384" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/submovements/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -614,23 +610,30 @@ plt.show()</expression-string>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/submovements/submovements.py" />
+    <entry file="file://$PROJECT_DIR$/requirements_dev.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/submovements/fit_submovements.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
+        <state relative-caret-position="1241">
+          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements_dev.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/submovements/DataProcessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="374">
+          <caret line="190" lean-forward="true" selection-start-line="190" selection-end-line="190" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

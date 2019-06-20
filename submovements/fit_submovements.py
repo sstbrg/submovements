@@ -30,7 +30,7 @@ def func(t, *params):
     return Y
 
 
-def optimize_jerk(trial, plot_fit):
+def optimize_jerk(trial):
     ###
     # Creates the cost jerk function for x and y
     # TODO: add support for all dimensions (currently fits only X data
@@ -49,30 +49,28 @@ def optimize_jerk(trial, plot_fit):
 
     n = 3
 
-    guess_x = [0, 0.9, 180]
+    guess_vx = [0, 0.9, 180]
     for n in range(1,n):
-        guess_x += [t0, D/n, 180]
+        guess_vx += [t0, D/n, 180]
 
+    guess_vy = [0, 0.9, 180]
+    for n in range(1,n):
+        guess_vy += [t0, D/n, 180]
 
     # TODO: calculate bounds
     #  bounds_low = [0, 0.1, -50, -50]
     #  bounds_high = [t.max(), t.max()-t.min(), 200, 200]
 
-    popt_x, pcov_x = curve_fit(func, t, Vx, p0=guess_x)
-    perr_x = np.sqrt(np.diag(pcov_x))
+    popt_vx, pcov_vx = curve_fit(func, t, Vx, p0=guess_vx)
+    perr_vx = np.sqrt(np.diag(pcov_vx))
 
-    print(popt_x)
-    print(perr_x)
+    popt_vy, pcov_vy = curve_fit(func, t, Vy, p0=guess_vy)
+    perr_vy = np.sqrt(np.diag(pcov_vy))
 
-    fit = func(t, *popt_x)
+    fit_vx = func(t, *popt_vx)
+    fit_vy = func(t, *popt_vy)
 
-    if plot_fit:
-        plt.plot(t, Vx)
-        plt.plot(t, fit, 'r-')
-        plt.show()
-
-
-    return fit, popt_x, perr_x
+    return fit_vx, fit_vy, popt_vx, perr_vx, popt_vy, perr_vy
 
 if __name__ == '__main__':
     path_to_raw_data = '..\\data\\results\\simonvisual\\1'

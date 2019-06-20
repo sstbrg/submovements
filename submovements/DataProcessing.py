@@ -7,6 +7,7 @@ import numpy as np
 from scipy.signal import butter, filtfilt
 from pathlib import Path
 import seaborn as sns
+from fit_submovements import *
 
 sns.set()
 
@@ -183,6 +184,10 @@ class Preprocessor():
 
     raw_headers = attr.ib(default=['SampleNum', 'x', 'y', 'z',
                                    'phi', 'theta', 'psi', 'Time', 'Event'])
+
+    def do_fit(self, trial):
+        fit_result = optimize_jerk(trial)
+        return fit_result
 
     def load_df_from_directory_gen(self, dir_path, cols=('x', 'y')):
         ###
