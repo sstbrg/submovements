@@ -7,19 +7,26 @@ import numpy as np
 from scipy.signal import butter, filtfilt
 from pathlib import Path
 import re
+#import seaborn as sns
 
 @attr.s
 class Subject(object):
     dir_path = attr.ib(default='')
     id = attr.ib(init=False)
     df_folder = attr.ib(default='')
-#
+    rep_amount = attr.ib(default=50)
+    block_amount = attr.ib(default=10)
+
     def __attrs_post_init__(self):
         self.id = os.path.split(self.dir_path)[1]
 
     def create_total_df(self):
         self.df_total = pd.DataFrame({'Vx': [], 'Vy': [], 'Rep': [], 'Block': [], 'Time': [], 'Condition': [],
                                       'ID': [], 'pos x':[], 'pos y':[]})  # creating an empty array for concatination use later
+        self.square_left_list = []
+        self.square_right_list = []
+        self.triangle_left_list = []
+        self.triangle_right_list = []
         pproc = Preprocessor()
         trial_gen = pproc.load_df_from_directory_gen(self.dir_path)
         for trial in trial_gen:
@@ -33,7 +40,6 @@ class Subject(object):
     def stimuli_df(self,stimuli):
         idx = pd.IndexSlice
         return self.df_total.loc[idx[:,stimuli,:,:,:],:]
-
 
 @attr.s
 class Trial(object):
