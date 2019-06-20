@@ -24,7 +24,7 @@ class Trial():
     stimulus = attr.ib(default='')      # Trial stimulus
     raw_file_path = attr.ib(default='') # Path to trial raw data
     id = attr.ib(default='')            # Subject ID (number)
-    time = attr.ib(default='')          # Time vector
+    #time = attr.ib(default='')          # Time vector
 
     # Data DataFrame which contains Position vectors and Velocity vectors.
     # We can choose which vectors to include from ('x','y','z') by using
@@ -54,21 +54,6 @@ class Trial():
         self.data = preprocessor.remove_baseline(self.data, cols=velocity_cols, threshold=threshold)
 
         self.data = self.data.set_index(self.data['Time']-self.data['Time'][0])
-
-    # def save_as_csv(self, dest_folder):
-    #     ###
-    #     # This method saves a Trial into a CSV
-    #     ###
-    #
-    #     assert Path(dest_folder).is_dir(), \
-    #         f'Destination directory does not exists: {dest_folder}'
-    #
-    #     dest_folder = Path(dest_folder)
-    #     df = self.data.copy()
-    #     filename = f"li_{self.stimulus}_{self.block}_{self.rep}.csv"
-    #     filepath = dest_folder.joinpath(filename)
-    #
-    #     df.to_csv(filepath)
 
     def create_df(self):
         ###
