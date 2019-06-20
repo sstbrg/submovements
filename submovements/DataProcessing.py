@@ -35,21 +35,54 @@ class Subject(object):
         self.df_total = self.df_total.set_index(['ID', 'Condition', 'Block', 'Rep', 'Time']).sort_values(
             ['ID', 'Condition', 'Block', 'Rep'], ascending=True)
 
-    def stimuli_plot(self,num_of_trials):
+    
+    def stimuli_plot_vx(self,num_of_trials):
         fig, axes = plt.subplots(2, 2)# add name to subplots
+        plt.xlabel('Time (sec)')
+        plt.ylabel('Vx (cm/sec)')
         for n,key in enumerate(self.df_dict):
+            if n==0:
+                axes[0,0].set_title(key)
+            if n==1:
+                axes[0,1].set_title(key)
+            if n==2:
+                axes[1,0].set_title(key)
+            if n==3:
+                axes[1,1].set_title(key)
             for trial in range(num_of_trials):
-                if n==1:
+                if n==0:
                     sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[0,0])
-                if n==2:
+                if n==1:
                     sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[0,1])
-                if n==3:
+                if n==2:
                     sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[1,0])
-                if n==4:
+                if n==3:
                     sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[1,1])
         plt.show()
                    
-
+def stimuli_plot_vy(self,num_of_trials):
+        fig, axes = plt.subplots(2, 2)# add name to subplots
+        plt.xlabel('Time (sec)')
+        plt.ylabel('Vy (cm/sec)')
+        for n,key in enumerate(self.df_dict):
+            if n==0:
+                axes[0,0].set_title(key)
+            if n==1:
+                axes[0,1].set_title(key)
+            if n==2:
+                axes[1,0].set_title(key)
+            if n==3:
+                axes[1,1].set_title(key)
+            for trial in range(num_of_trials):
+                if n==0:
+                    sns.lineplot(x="Time", y="Vy", data= self.df_dict[key][trial], ax=axes[0,0])
+                if n==1:
+                    sns.lineplot(x="Time", y="Vy", data= self.df_dict[key][trial], ax=axes[0,1])
+                if n==2:
+                    sns.lineplot(x="Time", y="Vy", data= self.df_dict[key][trial], ax=axes[1,0])
+                if n==3:
+                    sns.lineplot(x="Time", y="Vy", data= self.df_dict[key][trial], ax=axes[1,1])
+        plt.show()
 
 
 @attr.s
@@ -107,10 +140,8 @@ class Trial(object):
         pos_y = self.data['y']
         vx = self.data['Vx']
         vy = self.data['Vy']
-        time = np.arange(len(vx))    # change later !!!!
+        time = self.data.index.values
         condition = np.full(shape=len(vx), fill_value=self.stimulus)
-
-        # maybe add to main as trial attribute
         id = np.full(shape=len(vx),
                      fill_value=self.id
                      )
