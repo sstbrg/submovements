@@ -2,7 +2,7 @@
 
 import pytest
 
-from DataProcessing import Preprocessor, Trial
+from DataProcessing import Preprocessor, Trial, Subject
 import pandas as pd
 import numpy as np
 from glob import glob
@@ -12,11 +12,13 @@ def test_preprocessor_instance():
     pproc = Preprocessor()
     assert isinstance(pproc, Preprocessor)
 
-
 def test_trial_instance():
     trial = Trial()
     assert isinstance(trial, Trial)
 
+def test_subject_instance():
+    subject = Subject()
+    assert isinstance(subject,Subject)
 
 def test_invalid_source_dir():
     with pytest.raises(AssertionError) as AE:
@@ -25,7 +27,6 @@ def test_invalid_source_dir():
         for t in gen:
             print(t)
     assert 'Destination directory does not exist' in str(AE)
-
 
 def test_empty_source_dir():
     with pytest.raises(AssertionError) as AE:

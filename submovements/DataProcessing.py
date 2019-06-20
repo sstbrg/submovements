@@ -11,7 +11,6 @@ from fit_submovements import *
 
 sns.set()
 
-
 @attr.s
 class Subject(object):
     id = attr.ib(init=False)
@@ -44,6 +43,8 @@ class Subject(object):
         plt.xlabel('Time (sec)')
         plt.ylabel('Vx (cm/sec)')
         for n, key in enumerate(self.df_dict):
+            if num_of_trials> len(len(self.df_dict[key])):
+                Exception('not enough trials')
             if n == 0:
                 axes[0, 0].set_title(key)
             if n == 1:
@@ -68,6 +69,8 @@ class Subject(object):
         plt.xlabel('Time (sec)')
         plt.ylabel('Vy (cm/sec)')
         for n, key in enumerate(self.df_dict):
+            if num_of_trials> len(len(self.df_dict[key])):
+                Exception('not enough trials')
             if n == 0:
                 axes[0, 0].set_title(key)
             if n == 1:
