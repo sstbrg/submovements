@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa6cd3c6-22f7-473f-95b1-00908067bafc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.rst" beforeDir="false" afterPath="$PROJECT_DIR$/README.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/submovements/DataProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/submovements/DataProcessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,57 +12,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/submovements/submovements.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/indexing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="37128">
-              <caret line="2202" selection-start-line="2202" selection-end-line="2202" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/frame.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56015">
-              <caret line="3388" selection-start-line="3388" selection-end-line="3388" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/reshape/concat.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3910">
-              <caret line="243" selection-start-line="243" selection-end-line="243" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/submovements/DataProcessing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="143" column="61" lean-forward="true" selection-start-line="143" selection-start-column="61" selection-end-line="143" selection-end-column="61" />
+            <state relative-caret-position="303">
+              <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.rst">
-          <provider selected="true" editor-type-id="restructured-text-editor" />
+        <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/scipy/optimize/minpack.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="747" selection-start-line="747" selection-end-line="747" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/codecs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="320" selection-start-line="320" selection-end-line="320" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/scipy/optimize/_lsq/least_squares.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="738" selection-start-line="738" selection-end-line="738" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/submovements/DataProcessing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="211">
+              <caret line="40" column="83" lean-forward="true" selection-start-line="40" selection-start-column="83" selection-end-line="41" selection-end-column="82" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -78,6 +75,9 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>sample</find>
+      <find>index</find>
+      <find>velo</find>
+      <find>b</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -89,18 +89,19 @@
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/tox.ini" />
         <option value="$PROJECT_DIR$/submovements/__init__.py" />
-        <option value="$PROJECT_DIR$/tests/test_submovements.py" />
-        <option value="$PROJECT_DIR$/submovements/submovements.py" />
         <option value="$PROJECT_DIR$/README.rst" />
+        <option value="$PROJECT_DIR$/tests/test_submovements.py" />
         <option value="$PROJECT_DIR$/submovements/DataProcessing.py" />
+        <option value="$PROJECT_DIR$/submovements/MJoptimization_V1.py" />
+        <option value="$PROJECT_DIR$/submovements/submovements.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="167" />
-    <option name="y" value="64" />
-    <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="x" value="240" />
+    <option name="y" value="130" />
+    <option name="width" value="1440" />
+    <option name="height" value="780" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -124,6 +125,19 @@
               <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
               <item name="submovements" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
+              <item name="submovements" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="good_data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
+              <item name="submovements" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="good_data" type="462c0819:PsiDirectoryNode" />
+              <item name="csv" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -180,7 +194,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_submovements.test_process_empty_df" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_submovements.test_data_processing_and_save_csv" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="submovements" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -192,7 +206,23 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_submovements.test_process_empty_df&quot;" />
+      <option name="_new_target" value="&quot;test_submovements.test_data_processing_and_save_csv&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_submovements.test_preprocessor_instance" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="submovements" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_submovements.test_preprocessor_instance&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -209,22 +239,6 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_submovements.test_remove_baseline_bad_threshold&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test_submovements.test_remove_baseline_empty_df" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="submovements" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_submovements.test_remove_baseline_empty_df&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -247,10 +261,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.submovements" />
+        <item itemvalue="Python tests.pytest for test_submovements.test_preprocessor_instance" />
+        <item itemvalue="Python tests.pytest for test_submovements.test_data_processing_and_save_csv" />
         <item itemvalue="Python tests.pytest in test_submovements.py" />
         <item itemvalue="Python tests.pytest for test_submovements.test_remove_baseline_bad_threshold" />
-        <item itemvalue="Python tests.pytest for test_submovements.test_remove_baseline_empty_df" />
-        <item itemvalue="Python tests.pytest for test_submovements.test_process_empty_df" />
       </list>
     </recent_temporary>
   </component>
@@ -272,29 +286,12 @@
       <workItem from="1560954514913" duration="400000" />
       <workItem from="1560957664647" duration="226000" />
       <workItem from="1560957908164" duration="3708000" />
-      <workItem from="1560962645810" duration="956000" />
+      <workItem from="1560962645810" duration="8668000" />
+      <workItem from="1561011643007" duration="15639000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_test_submovements_test_plot_empty_df - 2019.06.19 at 14h 47m 54s.xml">
-      <configuration name="pytest for test_submovements.test_plot_empty_df" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_submovements_test_plot_empty_df - 2019.06.19 at 14h 48m 22s.xml">
-      <configuration name="pytest for test_submovements.test_plot_empty_df" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_submovements_test_process_empty_df - 2019.06.19 at 14h 48m 53s.xml">
-      <configuration name="pytest for test_submovements.test_process_empty_df" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_submovements_test_process_empty_df - 2019.06.19 at 14h 49m 09s.xml">
-      <configuration name="pytest for test_submovements.test_process_empty_df" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_submovements_test_remove_baseline_empty_df - 2019.06.19 at 14h 49m 54s.xml">
-      <configuration name="pytest for test_submovements.test_remove_baseline_empty_df" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_submovements_test_remove_baseline_bad_threshold - 2019.06.19 at 14h 50m 36s.xml">
-      <configuration name="pytest for test_submovements.test_remove_baseline_bad_threshold" configurationId="tests" />
-    </history-entry>
     <history-entry file="pytest_for_test_submovements_test_remove_baseline_bad_threshold - 2019.06.19 at 14h 51m 07s.xml">
       <configuration name="pytest for test_submovements.test_remove_baseline_bad_threshold" configurationId="tests" />
     </history-entry>
@@ -307,21 +304,39 @@
     <history-entry file="pytest_in_test_submovements_py - 2019.06.19 at 14h 53m 52s.xml">
       <configuration name="pytest in test_submovements.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_data_processing_and_save_csv - 2019.06.20 at 10h 34m 15s.xml">
+      <configuration name="pytest for test_submovements.test_data_processing_and_save_csv" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_data_processing_and_save_csv - 2019.06.20 at 10h 34m 36s.xml">
+      <configuration name="pytest for test_submovements.test_data_processing_and_save_csv" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_data_processing_and_save_csv - 2019.06.20 at 10h 34m 49s.xml">
+      <configuration name="pytest for test_submovements.test_data_processing_and_save_csv" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_preprocessor_instance - 2019.06.20 at 10h 39m 54s.xml">
+      <configuration name="pytest for test_submovements.test_preprocessor_instance" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_preprocessor_instance - 2019.06.20 at 10h 40m 24s.xml">
+      <configuration name="pytest for test_submovements.test_preprocessor_instance" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_preprocessor_instance - 2019.06.20 at 10h 43m 31s.xml">
+      <configuration name="pytest for test_submovements.test_preprocessor_instance" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59011000" />
+    <option name="totallyTimeSpent" value="82362000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15831557" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13059701" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.37703142" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -329,12 +344,12 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32932165" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32827735" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.05490405" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.3107676" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
     <layout-to-restore>
@@ -364,17 +379,39 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_submovements.py</url>
+          <line>95</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/submovements/MJoptimization_V1.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="Vx" />
+      </configuration>
+    </watches-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/submovements$pytest_in_test_submovements_py.coverage" NAME="pytest in test_submovements.py Coverage Results" MODIFIED="1560945230412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_empty_source_dir.coverage" NAME="pytest for test_submovements.test_empty_source_dir Coverage Results" MODIFIED="1560944362092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_remove_baseline_bad_threshold.coverage" NAME="pytest for test_submovements.test_remove_baseline_bad_threshold Coverage Results" MODIFIED="1560945210692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_data_processing_and_save_csv.coverage" NAME="pytest for test_submovements.test_data_processing_and_save_csv Coverage Results" MODIFIED="1561016084248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_process_empty_df.coverage" NAME="pytest for test_submovements.test_process_empty_df Coverage Results" MODIFIED="1560944946617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_source_dir_with_bad_file_name.coverage" NAME="pytest for test_submovements.test_source_dir_with_bad_file_name Coverage Results" MODIFIED="1560944367622" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_source_dir.coverage" NAME="pytest for test_submovements.test_source_dir Coverage Results" MODIFIED="1560943603632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_remove_baseline_empty_df.coverage" NAME="pytest for test_submovements.test_remove_baseline_empty_df Coverage Results" MODIFIED="1560944990881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_preprocessor_instance.coverage" NAME="pytest for test_submovements.test_preprocessor_instance Coverage Results" MODIFIED="1560939626132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_preprocessor_instance.coverage" NAME="pytest for test_submovements.test_preprocessor_instance Coverage Results" MODIFIED="1561016609750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_load_non_trial_file.coverage" NAME="pytest for test_submovements.test_load_non_trial_file Coverage Results" MODIFIED="1560943557378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/submovements$submovements.coverage" NAME="submovements Coverage Results" MODIFIED="1560963609230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/submovements" />
+    <SUITE FILE_PATH="coverage/submovements$submovements.coverage" NAME="submovements Coverage Results" MODIFIED="1561026920072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/submovements" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_trial_instance.coverage" NAME="pytest for test_submovements.test_trial_instance Coverage Results" MODIFIED="1560939629335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_load_bad_file_name.coverage" NAME="pytest for test_submovements.test_load_bad_file_name Coverage Results" MODIFIED="1560943997799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_load_bad_file.coverage" NAME="pytest for test_submovements.test_load_bad_file Coverage Results" MODIFIED="1560944495425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -384,53 +421,50 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>self.filtered_velocity_data.index.min()</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.filtered_velocity_data.index</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.filtered_position_data.diff().fillna(method='bfill')</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>dt.diff()</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>df.fillna(method='bfill')</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>df.diff().plot()
-plt.show()
-
-for col in df.diff():
-    df.diff()[col]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>df.diff().plot()
+        <expression-string>plt.plot(Px)
 plt.show()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>df.plot()
+        <expression-string>plt.plot(Ax)
 plt.show()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>not data_in.empty</expression-string>
+        <expression-string>plt.plot(Py)
+plt.show()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>plt.plot(t, Px)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.Ay</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>posy.max()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>posy.min()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.Ax</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>posx.min()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -470,13 +504,6 @@ plt.show()</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
           <caret line="103" selection-start-line="103" selection-end-line="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="311" selection-start-line="311" selection-end-line="311" />
         </state>
       </provider>
     </entry>
@@ -564,53 +591,91 @@ plt.show()</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_submovements.py">
+    <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/reshape/concat.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#41#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/submovements/submovements.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="534">
+          <caret line="243" selection-start-line="243" selection-end-line="243" />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/indexing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="37128">
+        <state relative-caret-position="167">
           <caret line="2202" selection-start-line="2202" selection-end-line="2202" />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/frame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56015">
+        <state relative-caret-position="173">
           <caret line="3388" selection-start-line="3388" selection-end-line="3388" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/reshape/concat.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3910">
-          <caret line="243" selection-start-line="243" selection-end-line="243" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.rst">
       <provider selected="true" editor-type-id="restructured-text-editor" />
     </entry>
+    <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/indexes/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="3957" selection-start-line="3957" selection-end-line="3957" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_submovements.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+          <folding>
+            <element signature="e#41#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/submovements/MJoptimization_V1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="51" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="320" selection-start-line="320" selection-end-line="320" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/scipy/optimize/minpack.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="747" selection-start-line="747" selection-end-line="747" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/submovements/DataProcessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="143" column="61" lean-forward="true" selection-start-line="143" selection-start-column="61" selection-end-line="143" selection-end-column="61" />
+        <state relative-caret-position="211">
+          <caret line="40" column="83" lean-forward="true" selection-start-line="40" selection-start-column="83" selection-end-line="41" selection-end-column="82" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/scipy/optimize/_lsq/least_squares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="738" selection-start-line="738" selection-end-line="738" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/submovements/submovements.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>

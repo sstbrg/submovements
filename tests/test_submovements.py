@@ -12,7 +12,6 @@ def test_preprocessor_instance():
     pproc = Preprocessor()
     assert isinstance(pproc, Preprocessor)
 
-
 def test_trial_instance():
     trial = Trial()
     assert isinstance(trial, Trial)
@@ -55,7 +54,7 @@ def test_load_bad_file():
             print(t)
     assert 'Could not load' in str(AE)
 
- 
+
 def test_plot_empty_df():
     with pytest.raises(AssertionError) as AE:
         pproc = Preprocessor()
