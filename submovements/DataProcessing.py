@@ -19,18 +19,29 @@ class Trial(object):
     # position data into filtered velocity
     ###
 
-    block = attr.ib(default=0)
-    rep = attr.ib(default=0)
-    stimulus = attr.ib(default='')
-    events = attr.ib(default=None)
-    raw_file_path = attr.ib(default='')
-    id = attr.ib(default='')
-    time = attr.ib(default='')
+    block = attr.ib(default=0)          # Trial block
+    rep = attr.ib(default=0)            # Trial repetition
+    stimulus = attr.ib(default='')      # Trial stimulus
+    raw_file_path = attr.ib(default='') # Path to trial raw data
+    id = attr.ib(default='')            # Subject ID (number)
+    time = attr.ib(default='')          # Time vector
+
+    # Data DataFrame which contains Position vectors and Velocity vectors.
+    # We can choose which vectors to include from ('x','y','z') by using
+    # the cols parameter. For example, cols=('x','y') will choose only dimensions x and y.
+
     data = attr.ib(default='')
 
     def preprocess(self, preprocessor,
                    cols=('x', 'y'),
                    threshold=0.05):
+        ###
+        # This method does Trial preprocessing using a Preprocessor
+        # in directions chosen by cols.
+        # Threshold refers to baseline removal. Data where ||Velocity|| < threshold
+        # is removed. Threshold is given in percentage w.r.t to max(||Velocity||).
+        ###
+
         assert isinstance(preprocessor, Preprocessor)
 
         cols=list(cols)
@@ -44,21 +55,26 @@ class Trial(object):
 
         self.data = self.data.set_index(self.data['Time']-self.data['Time'][0])
 
-    def save_as_csv(self, dest_folder):
-        assert Path(dest_folder).is_dir(), \
-            f'Destination directory does not exists: {dest_folder}'
-
-        dest_folder = Path(dest_folder)
-        df = self.data.copy()
-        filename = f"li_{self.stimulus}_{self.block}_{self.rep}.csv"
-        filepath = dest_folder.joinpath(filename)
-
-        df.to_csv(filepath)
+    # def save_as_csv(self, dest_folder):
+    #     ###
+    #     # This method saves a Trial into a CSV
+    #     ###
+    #
+    #     assert Path(dest_folder).is_dir(), \
+    #         f'Destination directory does not exists: {dest_folder}'
+    #
+    #     dest_folder = Path(dest_folder)
+    #     df = self.data.copy()
+    #     filename = f"li_{self.stimulus}_{self.block}_{self.rep}.csv"
+    #     filepath = dest_folder.joinpath(filename)
+    #
+    #     df.to_csv(filepath)
 
     def create_df(self):
         ###
-        # creates df for every trial with the columns:
+        # Creates a DataFrame for every trial with the columns:
         # Vx, Vy, Condition, Time, ID, Block, Repetition
+        # TODO: Generalize to z axis
         ###
 
         vx = self.data['Vx']
@@ -95,14 +111,14 @@ class Trial(object):
 
 @attr.s
 class Preprocessor(object):
-
     ###
     # This is a Preprocessing entity which can filter,
     # cut-via-threshold and plot DataFrames
     ###
 
-    raw_paths = attr.ib(default='data')
-    sample_rate = attr.ib(default=240)
+    raw_paths = attr.ib(default='data') # Path list of all the raw data files
+    sample_rate = attr.ib(default=240)  # Sample rate the raw data is sampled at
+
     raw_headers = attr.ib(default=['SampleNum', 'x', 'y', 'z',
                                    'phi', 'theta', 'psi', 'Time', 'Event'])
 
@@ -110,6 +126,7 @@ class Preprocessor(object):
         ###
         # This is a generator which takes csv
         # files from dir_path and yields Trials.
+        # cols controls which dimensions are saved.
         ###
 
         assert Path(dir_path).is_dir(), \
@@ -125,8 +142,9 @@ class Preprocessor(object):
         for fn in self.raw_paths:
             try:
                 df = pd.read_csv(fn, names=self.raw_headers)
-                trial_out.data['Time'] = df['Time']
-                trial_out.data[cols] = df[cols]
+                data = df['Time'].astype('float64')
+                data = pd.concat([data, df[cols]], axis=1)
+                trial_out.data = data
                 trial_data = os.path.split(fn)[1].split(sep='_')
                 trial_out.stimulus = trial_data[1] + '_' + trial_data[2]
                 trial_out.block = int(trial_data[3])
@@ -139,17 +157,19 @@ class Preprocessor(object):
 
     def load_single_file(self, file_path, cols=('x', 'y')):
         ###
-        # This method loads a single csv and yields a single Trial
+        # This method loads a single csv and yields a single Trial.
+        # cols controls which dimensions are saved.
         ###
 
         assert Path(file_path).is_file(), f'File does not exists: {file_path}'
         file_path = Path(file_path)
-
+        cols=list(cols)
         trial_out = Trial()
         try:
             df = pd.read_csv(file_path, names=self.raw_headers)
-            trial_out.data['Time'] = df['Time']
-            trial_out.data[cols] = df[cols]
+            data = df['Time'].astype('float64')
+            data = pd.concat([data, df[cols]], axis=1)
+            trial_out.data = data
             trial_data = os.path.split(file_path)[1].split(sep='_')
             trial_out.stimulus = trial_data[1] + '_' + trial_data[2]
             trial_out.block = int(trial_data[3])
@@ -163,8 +183,7 @@ class Preprocessor(object):
     @staticmethod
     def plot(data_in: pd.DataFrame):
         ###
-        # This is a plotting method that will work on a given DataFrame
-        # mode = 'pandas' will plot using Pandas and matplotlib.
+        # This is a plotting method that will work on a given DataFrame.
         ###
 
         assert isinstance(data_in, pd.DataFrame)
@@ -176,11 +195,25 @@ class Preprocessor(object):
 
     @staticmethod
     def butter_lowpass(cutoff, fs, order):
+        ###
+        # fs - sample rate in S/s
+        # order - filter order
+        ###
+
         nyq = 0.5 * fs
         normal_cutoff = cutoff / nyq
         return butter(order, normal_cutoff, btype='low', analog=False)
 
     def butter_lowpass_filter(self, data, cutoff, fs, order=2):
+        ###
+        # cutoff - lowpass cutoff frequency in Hz
+        # fs - sample rate in S/s
+        # order - filter order.
+        # Note: since we're using zero-phase filtering
+        # the effective order is 2*order.
+        # Here the effective order is 2*2=4 by default.
+        ###
+
         b, a = self.butter_lowpass(cutoff, fs, order=order)
         y = filtfilt(b, a, data)
         return y
@@ -196,7 +229,7 @@ class Preprocessor(object):
 
         df = data_in.copy()
 
-        # we start by filling NaNs in the data
+        # we start by filling NaNs in the data using nearest neighbor.
         df = df.fillna(method='bfill')
 
         for col in df:
@@ -229,7 +262,7 @@ class Preprocessor(object):
         # find data above threshold
         idx = df.loc[df >= threshold]
 
-        # set data cutting limits
+        # expand data cutting limits
         low_cut_index = int(idx.index[0]-0.1*self.sample_rate \
             if df.index.min() < idx.index[0]-0.1*self.sample_rate \
             else df.index.min())
