@@ -10,7 +10,7 @@ import re
 
 
 @attr.s
-class Trial(object):
+class Trial():
     ###
     # Trial(i,j) represents data from repetition i and block j
     # Using the preprocessor we can stream data from a
@@ -110,7 +110,7 @@ class Trial(object):
 
 
 @attr.s
-class Preprocessor(object):
+class Preprocessor():
     ###
     # This is a Preprocessing entity which can filter,
     # cut-via-threshold and plot DataFrames

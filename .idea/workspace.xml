@@ -15,31 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/submovements/submovements.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="95" selection-start-line="8" selection-start-column="95" selection-end-line="8" selection-end-column="95" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/indexes/base.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="3957" selection-start-line="3957" selection-end-line="3957" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.rst">
-          <provider selected="true" editor-type-id="restructured-text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/frame.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56015">
-              <caret line="3388" selection-start-line="3388" selection-end-line="3388" />
+            <state relative-caret-position="272">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
@@ -47,8 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/submovements/DataProcessing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="142" column="16" selection-start-line="142" selection-start-column="16" selection-end-line="142" selection-end-column="16" />
+            <state relative-caret-position="-3842">
+              <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -82,8 +59,8 @@
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/tox.ini" />
         <option value="$PROJECT_DIR$/submovements/__init__.py" />
-        <option value="$PROJECT_DIR$/tests/test_submovements.py" />
         <option value="$PROJECT_DIR$/README.rst" />
+        <option value="$PROJECT_DIR$/tests/test_submovements.py" />
         <option value="$PROJECT_DIR$/submovements/DataProcessing.py" />
         <option value="$PROJECT_DIR$/submovements/submovements.py" />
       </list>
@@ -111,12 +88,51 @@
             <path>
               <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
               <item name="submovements" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
+              <item name="submovements" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="results" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
+              <item name="submovements" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="results" type="462c0819:PsiDirectoryNode" />
+              <item name="simonvisual" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
+              <item name="submovements" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="results" type="462c0819:PsiDirectoryNode" />
+              <item name="simonvisual" type="462c0819:PsiDirectoryNode" />
+              <item name="1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
+              <item name="submovements" type="462c0819:PsiDirectoryNode" />
               <item name="submovements" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
               <item name="submovements" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
+              <item name="submovements" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="good_data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="submovements" type="b2602c69:ProjectViewProjectNode" />
+              <item name="submovements" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="good_data" type="462c0819:PsiDirectoryNode" />
+              <item name="csv" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -173,7 +189,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_submovements.test_process_empty_df" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_submovements.test_data_processing_and_save_csv" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="submovements" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -185,7 +201,23 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_submovements.test_process_empty_df&quot;" />
+      <option name="_new_target" value="&quot;test_submovements.test_data_processing_and_save_csv&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_submovements.test_preprocessor_instance" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="submovements" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_submovements.test_preprocessor_instance&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -202,22 +234,6 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_submovements.test_remove_baseline_bad_threshold&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test_submovements.test_remove_baseline_empty_df" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="submovements" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_submovements.test_remove_baseline_empty_df&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -240,10 +256,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.submovements" />
+        <item itemvalue="Python tests.pytest for test_submovements.test_preprocessor_instance" />
+        <item itemvalue="Python tests.pytest for test_submovements.test_data_processing_and_save_csv" />
         <item itemvalue="Python tests.pytest in test_submovements.py" />
         <item itemvalue="Python tests.pytest for test_submovements.test_remove_baseline_bad_threshold" />
-        <item itemvalue="Python tests.pytest for test_submovements.test_remove_baseline_empty_df" />
-        <item itemvalue="Python tests.pytest for test_submovements.test_process_empty_df" />
       </list>
     </recent_temporary>
   </component>
@@ -266,29 +282,11 @@
       <workItem from="1560957664647" duration="226000" />
       <workItem from="1560957908164" duration="3708000" />
       <workItem from="1560962645810" duration="8668000" />
-      <workItem from="1561011643007" duration="3940000" />
+      <workItem from="1561011643007" duration="5106000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_test_submovements_test_plot_empty_df - 2019.06.19 at 14h 47m 54s.xml">
-      <configuration name="pytest for test_submovements.test_plot_empty_df" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_submovements_test_plot_empty_df - 2019.06.19 at 14h 48m 22s.xml">
-      <configuration name="pytest for test_submovements.test_plot_empty_df" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_submovements_test_process_empty_df - 2019.06.19 at 14h 48m 53s.xml">
-      <configuration name="pytest for test_submovements.test_process_empty_df" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_submovements_test_process_empty_df - 2019.06.19 at 14h 49m 09s.xml">
-      <configuration name="pytest for test_submovements.test_process_empty_df" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_submovements_test_remove_baseline_empty_df - 2019.06.19 at 14h 49m 54s.xml">
-      <configuration name="pytest for test_submovements.test_remove_baseline_empty_df" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_submovements_test_remove_baseline_bad_threshold - 2019.06.19 at 14h 50m 36s.xml">
-      <configuration name="pytest for test_submovements.test_remove_baseline_bad_threshold" configurationId="tests" />
-    </history-entry>
     <history-entry file="pytest_for_test_submovements_test_remove_baseline_bad_threshold - 2019.06.19 at 14h 51m 07s.xml">
       <configuration name="pytest for test_submovements.test_remove_baseline_bad_threshold" configurationId="tests" />
     </history-entry>
@@ -301,20 +299,38 @@
     <history-entry file="pytest_in_test_submovements_py - 2019.06.19 at 14h 53m 52s.xml">
       <configuration name="pytest in test_submovements.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_data_processing_and_save_csv - 2019.06.20 at 10h 34m 15s.xml">
+      <configuration name="pytest for test_submovements.test_data_processing_and_save_csv" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_data_processing_and_save_csv - 2019.06.20 at 10h 34m 36s.xml">
+      <configuration name="pytest for test_submovements.test_data_processing_and_save_csv" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_data_processing_and_save_csv - 2019.06.20 at 10h 34m 49s.xml">
+      <configuration name="pytest for test_submovements.test_data_processing_and_save_csv" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_preprocessor_instance - 2019.06.20 at 10h 39m 54s.xml">
+      <configuration name="pytest for test_submovements.test_preprocessor_instance" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_preprocessor_instance - 2019.06.20 at 10h 40m 24s.xml">
+      <configuration name="pytest for test_submovements.test_preprocessor_instance" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_submovements_test_preprocessor_instance - 2019.06.20 at 10h 43m 31s.xml">
+      <configuration name="pytest for test_submovements.test_preprocessor_instance" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70663000" />
+    <option name="totallyTimeSpent" value="71829000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15991472" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15991472" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.38244852" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -358,17 +374,29 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_submovements.py</url>
+          <line>95</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/submovements$pytest_in_test_submovements_py.coverage" NAME="pytest in test_submovements.py Coverage Results" MODIFIED="1560945230412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_empty_source_dir.coverage" NAME="pytest for test_submovements.test_empty_source_dir Coverage Results" MODIFIED="1560944362092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_remove_baseline_bad_threshold.coverage" NAME="pytest for test_submovements.test_remove_baseline_bad_threshold Coverage Results" MODIFIED="1560945210692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_data_processing_and_save_csv.coverage" NAME="pytest for test_submovements.test_data_processing_and_save_csv Coverage Results" MODIFIED="1561016084248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_process_empty_df.coverage" NAME="pytest for test_submovements.test_process_empty_df Coverage Results" MODIFIED="1560944946617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_source_dir_with_bad_file_name.coverage" NAME="pytest for test_submovements.test_source_dir_with_bad_file_name Coverage Results" MODIFIED="1560944367622" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_source_dir.coverage" NAME="pytest for test_submovements.test_source_dir Coverage Results" MODIFIED="1560943603632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_remove_baseline_empty_df.coverage" NAME="pytest for test_submovements.test_remove_baseline_empty_df Coverage Results" MODIFIED="1560944990881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_preprocessor_instance.coverage" NAME="pytest for test_submovements.test_preprocessor_instance Coverage Results" MODIFIED="1560939626132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_preprocessor_instance.coverage" NAME="pytest for test_submovements.test_preprocessor_instance Coverage Results" MODIFIED="1561016609750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_load_non_trial_file.coverage" NAME="pytest for test_submovements.test_load_non_trial_file Coverage Results" MODIFIED="1560943557378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/submovements$submovements.coverage" NAME="submovements Coverage Results" MODIFIED="1561015541348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/submovements" />
+    <SUITE FILE_PATH="coverage/submovements$submovements.coverage" NAME="submovements Coverage Results" MODIFIED="1561016699684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/submovements" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_trial_instance.coverage" NAME="pytest for test_submovements.test_trial_instance Coverage Results" MODIFIED="1560939629335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_load_bad_file_name.coverage" NAME="pytest for test_submovements.test_load_bad_file_name Coverage Results" MODIFIED="1560943997799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/submovements$pytest_for_test_submovements_test_load_bad_file.coverage" NAME="pytest for test_submovements.test_load_bad_file Coverage Results" MODIFIED="1560944495425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -570,18 +598,8 @@ plt.show()</expression-string>
     </entry>
     <entry file="file://C:/Anaconda3/envs/pyhackathon2019/Lib/site-packages/pandas/core/frame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56015">
+        <state relative-caret-position="173">
           <caret line="3388" selection-start-line="3388" selection-end-line="3388" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_submovements.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#41#54#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -595,10 +613,20 @@ plt.show()</expression-string>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_submovements.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+          <folding>
+            <element signature="e#41#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/submovements/DataProcessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="142" column="16" selection-start-line="142" selection-start-column="16" selection-end-line="142" selection-end-column="16" />
+        <state relative-caret-position="-3842">
+          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -607,8 +635,8 @@ plt.show()</expression-string>
     </entry>
     <entry file="file://$PROJECT_DIR$/submovements/submovements.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="95" selection-start-line="8" selection-start-column="95" selection-end-line="8" selection-end-column="95" />
+        <state relative-caret-position="272">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>

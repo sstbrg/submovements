@@ -5,7 +5,8 @@ import pytest
 from DataProcessing import Preprocessor, Trial
 import pandas as pd
 import numpy as np
-
+from glob import glob
+import os
 
 def test_preprocessor_instance():
     pproc = Preprocessor()
@@ -90,3 +91,18 @@ def test_remove_baseline_bad_threshold():
         for t in gen:
             pproc.remove_baseline(t.position_data, threshold=0)
     assert 'Threshold' in str(AE)
+
+def test_data_processing_and_save_csv():
+    path_to_raw_data = 'good_data/'
+    path_to_trials = 'good_data/csv/'
+
+    pproc = Preprocessor()
+    raw_data_gen = pproc.load_df_from_directory_gen(dir_path=path_to_raw_data, cols=('x', 'y'))
+
+    for trial in raw_data_gen:
+        trial.preprocess(pproc)
+        trial.save_df(trial.data, path_to_trials)
+
+    list_of_raws = glob(os.path.join(path_to_raw_data, 'li_*.csv'))
+    list_of_results = glob(os.path.join(path_to_trials, '*.csv'))
+    assert list_of_raws == list_of_results
