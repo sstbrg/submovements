@@ -6,15 +6,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import butter, filtfilt
 from pathlib import Path
-import re
-import seaborn as sns; sns.set()
+import seaborn as sns
+from fit_submovements import *
+
+sns.set()
 
 @attr.s
 class Subject(object):
-    dir_path = attr.ib(default='')
     id = attr.ib(init=False)
-    df_folder = attr.ib(default='')
     df_dict = attr.ib({'square_left': [], 'square_right': [], 'tri_left': [], 'tri_right': []})
+    dir_path = attr.ib(default='')
+    df_folder = attr.ib(default='')
 
     def __attrs_post_init__(self):
         self.id = os.path.split(self.dir_path)[1]
@@ -185,6 +187,10 @@ class Preprocessor():
 
     raw_headers = attr.ib(default=['SampleNum', 'x', 'y', 'z',
                                    'phi', 'theta', 'psi', 'Time', 'Event'])
+
+    def do_fit(self, trial):
+        fit_result = optimize_jerk(trial)
+        return fit_result
 
     def load_df_from_directory_gen(self, dir_path, cols=('x', 'y')):
         ###

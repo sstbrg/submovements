@@ -36,6 +36,8 @@ Introduction
 
 This software works on a pipeline basis.
 
+To install use: pip install submovements
+
 Input
 ~~~~~~~~~~~~~~~
 The input is a directory of trials which are saved as CSV files with the following file names:

@@ -50,6 +50,7 @@ olefile=0.46=py_0
 openssl=1.1.1b=hfa6e2cd_2
 packaging=19.0=py_0
 pandas=0.24.2=py37he350917_0
+patsy=0.5.1=py_0
 pillow=6.0.0=py37h9a613e6_0
 pip=19.1.1=py37_0
 pipreqs=0.4.9=py_0
@@ -76,14 +77,18 @@ readme_renderer=24.0=py_0
 requests=2.22.0=py37_0
 requests-toolbelt=0.9.1=py_0
 scipy=1.2.1=py37h29ff71c_0
+seaborn=0.9.0=py_1
 setuptools=41.0.1=py37_0
 sip=4.19.8=py37h6538335_1000
 six=1.12.0=py37_1000
 sqlite=3.28.0=hfa6e2cd_0
+statsmodels=0.9.0=py37hfa6e2cd_1000
 tk=8.6.9=hfa6e2cd_1002
 toml=0.10.0=py_0
 tornado=6.0.2=py37hfa6e2cd_0
 tox=3.12.0=py_0
+tqdm=4.32.2=py_0
+twine=1.13.0=py_1
 urllib3=1.24.3=py37_0
 vc=14.1=h0510ff6_4
 virtualenv=16.0.0=py37_1000
