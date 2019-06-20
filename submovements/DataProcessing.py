@@ -7,15 +7,14 @@ import numpy as np
 from scipy.signal import butter, filtfilt
 from pathlib import Path
 import re
-#import seaborn as sns
+import seaborn as sns; sns.set()
 
 @attr.s
 class Subject(object):
     dir_path = attr.ib(default='')
     id = attr.ib(init=False)
     df_folder = attr.ib(default='')
-    rep_amount = attr.ib(default=50)
-    block_amount = attr.ib(default=10)
+    df_dict = attr.ib({'square_left':[],'square_right':[],'tri_left':[],'tri_right':[]})
 
     def __attrs_post_init__(self):
         self.id = os.path.split(self.dir_path)[1]
@@ -23,23 +22,35 @@ class Subject(object):
     def create_total_df(self):
         self.df_total = pd.DataFrame({'Vx': [], 'Vy': [], 'Rep': [], 'Block': [], 'Time': [], 'Condition': [],
                                       'ID': [], 'pos x':[], 'pos y':[]})  # creating an empty array for concatination use later
-        self.square_left_list = []
-        self.square_right_list = []
-        self.triangle_left_list = []
-        self.triangle_right_list = []
         pproc = Preprocessor()
         trial_gen = pproc.load_df_from_directory_gen(self.dir_path)
         for trial in trial_gen:
             trial.preprocess(pproc)
             df = trial.create_df()
             trial.save_df(df, self.df_folder)
+            for key in self.df_dict:
+                if key==trial.stimulus:
+                    self.df_dict[key].append(df)
             self.df_total = pd.concat([self.df_total, df])
         self.df_total = self.df_total.set_index(['ID', 'Condition', 'Block', 'Rep', 'Time']).sort_values(
             ['ID', 'Condition', 'Block', 'Rep'], ascending=True)
 
-    def stimuli_df(self,stimuli):
-        idx = pd.IndexSlice
-        return self.df_total.loc[idx[:,stimuli,:,:,:],:]
+    def stimuli_plot(self,num_of_trials):
+        fig, axes = plt.subplots(2, 2)# add name to subplots
+        for n,key in enumerate(self.df_dict):
+            for trial in range(num_of_trials):
+                if n==1:
+                    sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[0,0])
+                if n==2:
+                    sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[0,1])
+                if n==3:
+                    sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[1,0])
+                if n==4:
+                    sns.lineplot(x="Time", y="Vx", data= self.df_dict[key][trial], ax=axes[1,1])
+        plt.show()
+                   
+
+
 
 @attr.s
 class Trial(object):
@@ -54,40 +65,34 @@ class Trial(object):
     block = attr.ib(default=0)
     rep = attr.ib(default=0)
     stimulus = attr.ib(default='')
-    position_data = attr.ib(default=None)
-    velocity_data = attr.ib(default=None)
-    filtered_velocity_data = attr.ib(default=None)
-    filtered_position_data = attr.ib(default=None)
     events = attr.ib(default=None)
     raw_file_path = attr.ib(default='')
     id = attr.ib(default='')
+    time = attr.ib(default='')
+    data = attr.ib(default='')
 
     def preprocess(self, preprocessor,
-                   axes=('x', 'y', 'z'),
-                   threshold=0.005):
+                   cols=('x', 'y'),
+                   threshold=0.05):
         assert isinstance(preprocessor, Preprocessor)
 
-        self.filtered_position_data = preprocessor.filter_raw_data(
-            self.position_data[list(axes)])
+        cols=list(cols)
+        self.data[cols] = preprocessor.filter_raw_data(self.data[cols])
 
-        self.filtered_velocity_data = \
-            self.filtered_position_data.diff().fillna(method='bfill')
-        self.filtered_velocity_data *= preprocessor.sample_rate
+        velocity_cols = [f'V{q}' for q in cols]
+        self.data[velocity_cols] = preprocessor.sample_rate * \
+                                             self.data[cols].diff().fillna(method='bfill')
 
-        self.filtered_velocity_data = preprocessor.remove_baseline(
-            self.filtered_velocity_data, threshold=threshold)
+        self.data = preprocessor.remove_baseline(self.data, cols=velocity_cols, threshold=threshold)
 
-        self.filtered_position_data = self.filtered_position_data[
-                                      self.filtered_velocity_data.index.min():
-                                      self.filtered_velocity_data.index.max()]
+        self.data = self.data.set_index(self.data['Time']-self.data['Time'][0])
 
     def save_as_csv(self, dest_folder):
         assert Path(dest_folder).is_dir(), \
             f'Destination directory does not exists: {dest_folder}'
 
         dest_folder = Path(dest_folder)
-        df = self.filtered_velocity_data.copy()
-        df.columns = ['Vx', 'Vy']
+        df = self.data.copy()
         filename = f"li_{self.stimulus}_{self.block}_{self.rep}.csv"
         filepath = dest_folder.joinpath(filename)
 
@@ -98,18 +103,19 @@ class Trial(object):
         # creates df for every trial with the columns:
         # Vx, Vy, Condition, Time, ID, Block, Repetition
         ###
-
-        vx = self.filtered_velocity_data['x']
-        vy = self.filtered_velocity_data['y']
+        pos_x = self.data['x']
+        pos_y = self.data['y']
+        vx = self.data['Vx']
+        vy = self.data['Vy']
         time = np.arange(len(vx))    # change later !!!!
         condition = np.full(shape=len(vx), fill_value=self.stimulus)
+
+        # maybe add to main as trial attribute
         id = np.full(shape=len(vx),
                      fill_value=self.id
                      )
         block = np.full(shape=len(vx), fill_value=self.block, dtype=np.int)
         rep = np.full(shape=len(vx), fill_value=self.rep, dtype=np.int)
-        pos_x = self.filtered_position_data['x']
-        pos_y = self.filtered_position_data['y']
         return pd.DataFrame({'Vx': vx, 'Vy': vy, 'Rep': rep, 'Block': block,
                              'Time': time, 'Condition': condition, 'ID': id, 'pos x':pos_x, 'pos y':pos_y})
 
@@ -131,23 +137,25 @@ class Trial(object):
                     print("Creation of the directory %s failed" % path)
 
 
-@attr.s
-class Preprocessor(object):
 
+@attr.s
+class Preprocessor():
     ###
     # This is a Preprocessing entity which can filter,
     # cut-via-threshold and plot DataFrames
     ###
 
-    raw_paths = attr.ib(default='data')
-    sample_rate = attr.ib(default=240)
+    raw_paths = attr.ib(default='data') # Path list of all the raw data files
+    sample_rate = attr.ib(default=240)  # Sample rate the raw data is sampled at
+
     raw_headers = attr.ib(default=['SampleNum', 'x', 'y', 'z',
                                    'phi', 'theta', 'psi', 'Time', 'Event'])
 
-    def load_df_from_directory_gen(self, dir_path):
+    def load_df_from_directory_gen(self, dir_path, cols=('x', 'y')):
         ###
         # This is a generator which takes csv
         # files from dir_path and yields Trials.
+        # cols controls which dimensions are saved.
         ###
 
         assert Path(dir_path).is_dir(), \
@@ -158,13 +166,14 @@ class Preprocessor(object):
         assert len(self.raw_paths) > 0, f'No source files found!'
 
         trial_out = Trial()
+        trial_out.data = pd.DataFrame()
+        cols = list(cols)
         for fn in self.raw_paths:
             try:
                 df = pd.read_csv(fn, names=self.raw_headers)
-                df = df.set_index('Time')
-                trial_out.position_data = df[['x', 'y', 'z']]
-                trial_out.events = df[['Event']]
-                trial_out.velocity_data = df[['x', 'y', 'z']].diff()
+                data = df['Time'].astype('float64')
+                data = pd.concat([data, df[cols]], axis=1)
+                trial_out.data = data
                 trial_data = os.path.split(fn)[1].split(sep='_')
                 trial_out.stimulus = trial_data[1] + '_' + trial_data[2]
                 trial_out.block = int(trial_data[3])
@@ -175,30 +184,35 @@ class Preprocessor(object):
             except ValueError:
                 raise AssertionError(f'Could not load {fn}.')
 
-    def load_single_file(self, file_path):
+    def load_single_file(self, file_path, cols=('x', 'y')):
         ###
-        # This method loads a single csv and yields a single Trial
+        # This method loads a single csv and yields a single Trial.
+        # cols controls which dimensions are saved.
         ###
 
         assert Path(file_path).is_file(), f'File does not exists: {file_path}'
         file_path = Path(file_path)
-
+        cols=list(cols)
         trial_out = Trial()
         try:
-            trial_out.data = pd.read_csv(file_path, names=self.raw_headers)
+            df = pd.read_csv(file_path, names=self.raw_headers)
+            data = df['Time'].astype('float64')
+            data = pd.concat([data, df[cols]], axis=1)
+            trial_out.data = data
             trial_data = os.path.split(file_path)[1].split(sep='_')
-            trial_out.subject_id = trial_data[0]
-            trial_out.stimulus = trial_data[1]
+            trial_out.stimulus = trial_data[1] + '_' + trial_data[2]
+            trial_out.block = int(trial_data[3])
+            trial_out.rep = int(os.path.splitext(trial_data[4])[0])
             trial_out.raw_file_path = file_path
+            trial_out.id = os.path.split(file_path)[1]
             return trial_out
-        except IOError:
-            raise AssertionError(f'{file_path} was not loaded.')
+        except ValueError:
+            raise AssertionError(f'Could not load {file_path}.')
 
     @staticmethod
     def plot(data_in: pd.DataFrame):
         ###
-        # This is a plotting method that will work on a given DataFrame
-        # mode = 'pandas' will plot using Pandas and matplotlib.
+        # This is a plotting method that will work on a given DataFrame.
         ###
 
         assert isinstance(data_in, pd.DataFrame)
@@ -210,28 +224,33 @@ class Preprocessor(object):
 
     @staticmethod
     def butter_lowpass(cutoff, fs, order):
+        ###
+        # fs - sample rate in S/s
+        # order - filter order
+        ###
+
         nyq = 0.5 * fs
         normal_cutoff = cutoff / nyq
         return butter(order, normal_cutoff, btype='low', analog=False)
 
     def butter_lowpass_filter(self, data, cutoff, fs, order=2):
+        ###
+        # cutoff - lowpass cutoff frequency in Hz
+        # fs - sample rate in S/s
+        # order - filter order.
+        # Note: since we're using zero-phase filtering
+        # the effective order is 2*order.
+        # Here the effective order is 2*2=4 by default.
+        ###
+
         b, a = self.butter_lowpass(cutoff, fs, order=order)
         y = filtfilt(b, a, data)
         return y
 
-    def filter_raw_data(self, data_in: pd.DataFrame,
-                        lpf_on=True):
+    def filter_raw_data(self, data_in: pd.DataFrame, cutoff=5, order=2):
         ###
-        # This method applies the Savitsky-Golay filter
-        # on a data frame.
-        # For example, the velocity is extracted by
-        # setting deriv=1 and data_in to position data.
-        #
-        # S-G paramters:
-        # window_len - how many samples are used for
-        # polynomial fitting of order polyorder.
-        # deriv=n controls whether we smooth the data
-        # or its n'th derivative.
+        # This method applies a 5hz low pass
+        # zero-phase butterworth filter.
         ###
 
         assert isinstance(data_in, pd.DataFrame)
@@ -239,23 +258,17 @@ class Preprocessor(object):
 
         df = data_in.copy()
 
-        # we start by filling NaNs in the data
+        # we start by filling NaNs in the data using nearest neighbor.
         df = df.fillna(method='bfill')
 
-        if lpf_on:
-            # 5hz low pass (zero phase)
-            cutoff = 5
-            order = 2
-
-            for col in df:
-                df[col] = self.butter_lowpass_filter(df[col],
-                                                     cutoff=cutoff,
-                                                     fs=self.sample_rate,
-                                                     order=order)
+        for col in df:
+            df[col] = self.butter_lowpass_filter(df[col],
+                                                 cutoff=cutoff,
+                                                 fs=self.sample_rate,
+                                                 order=order)
         return df
 
-    @staticmethod
-    def remove_baseline(data_in: pd.DataFrame, threshold=0.005):
+    def remove_baseline(self, data_in: pd.DataFrame, cols=('x', 'y'), threshold=0.05):
         ###
         # This method takes a data frame of velocity data,
         # calculates the normalized magnitude of
@@ -266,10 +279,11 @@ class Preprocessor(object):
         assert isinstance(data_in, pd.DataFrame)
         assert not data_in.empty, f'No data to process!'
         assert threshold > 0, f'Threshold must be greater or equal than zero.'
+        assert len(cols) > 0, f'Cannot process if no columns are specified.'
 
         # calculate absolute velocity
-        df = np.power(data_in, 2)
-        df = df.sum(axis=1)
+        df = np.power(data_in[cols], 2)
+        df = np.sqrt(df[cols].sum(axis=1))
 
         # min-max normalization
         df = (df - df.min()) / (df.max() - df.min())
@@ -277,12 +291,12 @@ class Preprocessor(object):
         # find data above threshold
         idx = df.loc[df >= threshold]
 
-        # set data cutting limits
-        low_cut_index = idx.index.min()-0.1 \
-            if df.index.min() < idx.index.min()-0.1 \
-            else df.index.min()
-        high_cut_index = idx.index.max()+0.1 \
-            if df.index.max() > idx.index.max()+0.1 \
-            else df.index.max()
+        # expand data cutting limits
+        low_cut_index = int(idx.index[0]-0.1*self.sample_rate \
+            if df.index.min() < idx.index[0]-0.1*self.sample_rate \
+            else df.index.min())
+        high_cut_index = int(idx.index[-1]+0.1*self.sample_rate \
+            if df.index.max() > idx.index[-1]+0.1*self.sample_rate \
+            else df.index.max())
 
-        return data_in.copy()[low_cut_index:high_cut_index]
+        return data_in.copy()[low_cut_index:high_cut_index].reset_index(drop=True)
