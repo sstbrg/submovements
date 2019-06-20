@@ -7,9 +7,7 @@ import numpy as np
 from scipy.signal import butter, filtfilt
 from pathlib import Path
 import re
-import seaborn as sns;
-
-sns.set()
+import seaborn as sns; sns.set()
 
 
 @attr.s
