@@ -89,7 +89,7 @@ class Subject(object):
 
 
 @attr.s
-class Trial(object):
+class Trial():
     ###
     # Trial(i,j) represents data from repetition i and block j
     # Using the preprocessor we can stream data from a
@@ -98,47 +98,48 @@ class Trial(object):
     # position data into filtered velocity
     ###
 
-    block = attr.ib(default=0)
-    rep = attr.ib(default=0)
-    stimulus = attr.ib(default='')
-    events = attr.ib(default=None)
-    raw_file_path = attr.ib(default='')
-    id = attr.ib(default='')
-    time = attr.ib(default='')
+    block = attr.ib(default=0)          # Trial block
+    rep = attr.ib(default=0)            # Trial repetition
+    stimulus = attr.ib(default='')      # Trial stimulus
+    raw_file_path = attr.ib(default='') # Path to trial raw data
+    id = attr.ib(default='')            # Subject ID (number)
+
+    # Data DataFrame which contains Position vectors and Velocity vectors.
+    # We can choose which vectors to include from ('x','y','z') by using
+    # the cols parameter. For example, cols=('x','y') will choose only dimensions x and y.
+
     data = attr.ib(default='')
 
     def preprocess(self, preprocessor,
                    cols=('x', 'y'),
                    threshold=0.05):
+        ###
+        # This method does Trial preprocessing using a Preprocessor
+        # in directions chosen by cols.
+        # Threshold refers to baseline removal. Data where ||Velocity|| < threshold
+        # is removed. Threshold is given in percentage w.r.t to max(||Velocity||).
+        ###
+
         assert isinstance(preprocessor, Preprocessor)
 
-        cols = list(cols)
+        cols=list(cols)
         self.data[cols] = preprocessor.filter_raw_data(self.data[cols])
 
         velocity_cols = [f'V{q}' for q in cols]
         self.data[velocity_cols] = preprocessor.sample_rate * \
-                                   self.data[cols].diff().fillna(method='bfill')
+                                             self.data[cols].diff().fillna(method='bfill')
 
         self.data = preprocessor.remove_baseline(self.data, cols=velocity_cols, threshold=threshold)
 
-        self.data = self.data.set_index(self.data['Time'] - self.data['Time'][0])
-
-    def save_as_csv(self, dest_folder):
-        assert Path(dest_folder).is_dir(), \
-            f'Destination directory does not exists: {dest_folder}'
-
-        dest_folder = Path(dest_folder)
-        df = self.data.copy()
-        filename = f"li_{self.stimulus}_{self.block}_{self.rep}.csv"
-        filepath = dest_folder.joinpath(filename)
-
-        df.to_csv(filepath)
+        self.data = self.data.set_index(self.data['Time']-self.data['Time'][0])
 
     def create_df(self):
         ###
-        # creates df for every trial with the columns:
+        # Creates a DataFrame for every trial with the columns:
         # Vx, Vy, Condition, Time, ID, Block, Repetition
+        # TODO: Generalize to z axis
         ###
+        
         pos_x = self.data['x']
         pos_y = self.data['y']
         vx = self.data['Vx']
@@ -325,6 +326,7 @@ class Preprocessor():
         idx = df.loc[df >= threshold]
 
         # expand data cutting limits
+
         low_cut_index = int(idx.index[0] - 0.1 * self.sample_rate \
                                 if df.index.min() < idx.index[0] - 0.1 * self.sample_rate \
                                 else df.index.min())
