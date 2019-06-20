@@ -8,6 +8,32 @@ from scipy.signal import butter, filtfilt
 from pathlib import Path
 import re
 
+@attr.s
+class Subject(object):
+    dir_path = attr.ib(default='')
+    id = attr.ib(init=False)
+    df_folder = attr.ib(default='')
+#
+    def __attrs_post_init__(self):
+        self.id = os.path.split(self.dir_path)[1]
+
+    def create_total_df(self):
+        self.df_total = pd.DataFrame({'Vx': [], 'Vy': [], 'Rep': [], 'Block': [], 'Time': [], 'Condition': [],
+                                      'ID': [], 'pos x':[], 'pos y':[]})  # creating an empty array for concatination use later
+        pproc = Preprocessor()
+        trial_gen = pproc.load_df_from_directory_gen(self.dir_path)
+        for trial in trial_gen:
+            trial.preprocess(pproc)
+            df = trial.create_df()
+            trial.save_df(df, self.df_folder)
+            self.df_total = pd.concat([self.df_total, df])
+        self.df_total = self.df_total.set_index(['ID', 'Condition', 'Block', 'Rep', 'Time']).sort_values(
+            ['ID', 'Condition', 'Block', 'Rep'], ascending=True)
+
+    def stimuli_df(self,stimuli):
+        idx = pd.IndexSlice
+        return self.df_total.loc[idx[:,stimuli,:,:,:],:]
+
 
 @attr.s
 class Trial():
@@ -66,15 +92,15 @@ class Trial():
         vy = self.data['Vy']
         time = np.arange(len(vx))    # change later !!!!
         condition = np.full(shape=len(vx), fill_value=self.stimulus)
-
-        # maybe add to main as trial attribute
         id = np.full(shape=len(vx),
                      fill_value=self.id
                      )
         block = np.full(shape=len(vx), fill_value=self.block, dtype=np.int)
         rep = np.full(shape=len(vx), fill_value=self.rep, dtype=np.int)
+        pos_x = self.filtered_position_data['x']
+        pos_y = self.filtered_position_data['y']
         return pd.DataFrame({'Vx': vx, 'Vy': vy, 'Rep': rep, 'Block': block,
-                             'Time': time, 'Condition': condition, 'ID': id})
+                             'Time': time, 'Condition': condition, 'ID': id, 'pos x':pos_x, 'pos y':pos_y})
 
     def save_df(self, df, dest_folder):
         ###
