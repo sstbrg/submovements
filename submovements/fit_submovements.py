@@ -85,7 +85,7 @@ if __name__ == '__main__':
     for trial in raw_data_gen:
         trial.preprocess(pproc)
         trial.save_df(trial.data, path_to_trials)
-        res = optimize_jerk(trial, 0)
-        print(f'Parameters: {res[2]}')
-        print(f'Parameter errors: {res[3]}')
+        res = optimize_jerk(trial, True)
+        print(f'Parameters: {res[1]}')
+        print(f'Parameter errors: {res[2]}')
         break

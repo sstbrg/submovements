@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import butter, filtfilt
 from pathlib import Path
-import re
-
 
 @attr.s
 class Trial():
@@ -24,7 +22,6 @@ class Trial():
     stimulus = attr.ib(default='')      # Trial stimulus
     raw_file_path = attr.ib(default='') # Path to trial raw data
     id = attr.ib(default='')            # Subject ID (number)
-    #time = attr.ib(default='')          # Time vector
 
     # Data DataFrame which contains Position vectors and Velocity vectors.
     # We can choose which vectors to include from ('x','y','z') by using
