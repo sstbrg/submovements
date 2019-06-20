@@ -30,14 +30,18 @@ Our goal is to detect sub-movements from motion data.
 Introduction
 ---------------
 
+.. image:: https://ars.els-cdn.com/content/image/1-s2.0-S2352914818302028-gr5.jpg
+    :target: https://ars.els-cdn.com/content/image/1-s2.0-S2352914818302028-gr5.jpg
+    :caption: https://doi.org/10.1016/j.imu.2019.01.005
+
 This software works on a pipeline basis.
 
 Input
 ~~~~~~~~~~~~~~~
 The input is a directory of trials which are saved as CSV files with the following file names:
-xx_stimulus_side_block#_repetition#.csv
+li_stimulus_side_block#_repetition#.csv
 
-Other .csv files with a different name format are ignored.
+Other .csv files with a different name format **are ignored**.
 
 Pre-processing (Preprocessor class)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -47,17 +51,27 @@ Pre-processing (Preprocessor class)
 
 3. d(x,y)/dt is calculated to yield velocities (Vx,Vy) as a function of time.
 
-4. To remove the duration where (Vx,Vy) are approximately zero we use thresholding on ||(Vx,Vy)||, such that the any data where ||(Vx,Vy)|| < threshold (0.001 by default) is removed, excluding a 0.1s portion around the time where motion took place.
+4. To remove the duration where (Vx,Vy) are approximately zero we use thresholding on ||(Vx,Vy)||, such that the any data where ||(Vx,Vy)|| < threshold (0.001 by default) is removed, **not including** a 0.1s portion around the time where motion took place.
 
 5. The filtered velocity is saved under the Trial class for further processing.
+
+*For specific explanations on methods and attributes see commentary in submovements/DataProcessing.py.*
 
 Trial processing (Trial class)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TO-DO
+This class represents a single Trial for a given subject (labeled by its numeric id).
+For example, if the CSV files are saved under:
+:: data/results/sinmonvisual/12345/li_stimulus_side_block#_repetition#.csv
+The subject id is 12345
+
+Additional attributes are: stimulus, block, repetition and data.
+
+*For specific explanations on methods and attributes see commentary in submovements/DataProcessing.py.*
 
 Credits
 -------
+
 
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
